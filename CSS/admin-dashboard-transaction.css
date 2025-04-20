@@ -1,0 +1,125 @@
+/* Admin Dashboard Transaction CSS */
+.trans-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #F6F6F6;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+.trans-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.trans-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-left: auto;
+}
+.trans-search {
+  position: relative;
+  margin-top: 10px;
+}
+.trans-search input {
+  padding: 8px 30px 8px 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: none;
+}
+.trans-search::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  font-size: 16px;
+}
+.trans-sort, .trans-export {
+  padding: 2px 12px;
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.trans-export {
+  background-color: #861919;
+  color: #fff;
+  border: none;
+  padding: 2px 25px;
+}
+.trans-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.trans-table td {
+  text-align: left;
+  padding: 12px;
+  vertical-align: middle;
+  font-size: 1em;
+}
+.trans-table th {
+  background-color: #1c1c1c;
+  color: white;
+  font-size: 1.1em;
+}
+.trans-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.trans-avatar {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #861919;
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
+  line-height: 32px;
+  margin-right: 10px;
+}
+.trans-status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.status-success {
+  background-color: #e4fcef;
+  color: #1bb56f;
+  font-weight: 600;
+}
+.status-progress {
+  background-color: #fff8e1;
+  color: #e0a800;
+  font-weight: 600;
+}
+.status-cancel {
+  background-color: #fdecea;
+  color: #e74c3c;
+  font-weight: 600;
+}
+.trans-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+.trans-pages {
+  display: flex;
+  gap: 5px;
+}
+.trans-pages button {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+.trans-pages .active {
+  background-color: #861919;
+  color: white;
+}

@@ -1,0 +1,238 @@
+.fullsetup-container {
+    display: flex;
+    max-width: 1400px;
+    width: 100%;
+    margin: 20px auto;
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    width: 25%;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+  }
+  .sidebar h3 {
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .category-section {
+    margin-bottom: 20px;
+  }
+  .category-section ul {
+    list-style: none;
+    padding-left: 10px;
+  }
+  
+  .category-section ul li {
+    font-size: 14px;
+    margin-bottom: 8px;
+    margin-top: 10px;
+    font-weight: 400;
+  }
+  .full-setup {
+    font-size: 1em;
+    margin-bottom: 8px;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .basic-setup {
+    font-size: 1em;
+    margin-bottom: 8px;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  .category-section ul li, a{
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  /* Filter Section */
+  .filter-section {
+    margin-top: 30px;
+  }
+  
+  .filter-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .filter-section input[type="text"],
+  .filter-section input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    box-shadow: none;
+  }
+  
+  .price-range {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .price-range input[type="number"] {
+    flex: 1;
+  }
+  
+  .price-range button {
+    padding: 8px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .price-range button:hover {
+    background-color: #555;
+  }
+  
+  .guitar-type {
+    font-size: 14px;
+    margin-top: 20px;
+  }
+  
+  .guitar-type label {
+    margin-left: 5px;
+    color: #555;
+  }
+  .guitar-type input[type="checkbox"] {
+    margin-right: 5px;
+    box-shadow: none;
+    color: #800000;
+  }
+  
+  /* Main Content Styles */
+  .main-content {
+    width: 75%;
+    padding: 20px;
+  }
+  
+  /* Sort Options */
+  .sort-options {
+    margin-bottom: 20px;
+  }
+  
+  .btn-sort {
+    padding: 8px 12px;
+    background-color: #8D0101;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 7px 20px;
+  }
+
+  .btn-popular {
+    padding: 8px 12px;
+    background-color: #D9D9D9;
+    border: none;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 0.5em 3em;
+    font-weight: 600;
+  }
+  
+  /* Services Grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .service-item {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .service-item img {
+    width: 100%;
+    display: block;
+  }
+  
+  .service-item h4 {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #333;
+    padding: 0 10px;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+  
+  .service-item p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  
+.apply-button {
+    padding: 5px 30px;
+    background-color: #8D0101;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    width: 40%;
+    text-align: center;
+    margin: 0 auto; /* Centers the button horizontally */
+    display: block; /* Ensures the margin auto works */
+}
+  
+  /* Style for both page numbers and next button */
+  .page-number,
+  .next-button {
+    margin: 0 5px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #800000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .pagination {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .page-number, .next-button {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 500;
+  }
+
+  .current-page {
+    background-color: #800000;
+    color: white;
+  }
+  .next-button {
+    background-color: #800000;
+    color: white;
+  }

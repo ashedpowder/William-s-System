@@ -1,0 +1,107 @@
+/* Admin Dashboard Customer CSS */  
+.customer-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+
+  }
+  .header-customers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .search-box-customers {
+    position: relative;
+    width: 300px;
+    margin-left: auto;
+  }
+  .search-box-customers i{
+    position: absolute;
+    left: 10.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black;
+  }
+  .search-box-customers input {
+    padding: 8px 30px 8px 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: none;
+    cursor: pointer;
+  }
+  
+  table.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead.customer-head th {
+    text-align: left;
+    padding: 12px;
+    color: #ffffff;
+    font-size: 1.1rem;
+    background-color: #1c1c1c;
+    font-weight: 500;
+  }
+  tbody.customer-body tr {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  tbody.customer-body td {
+    padding: 14px 12px;
+    vertical-align: middle;
+    font-size: 14px;
+  }
+  .customer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .customer-info img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .completed {
+    background-color: #e5f9f1;
+    color: #00b67a;
+  }
+  .in-progress {
+    background-color: #fff4e5;
+    color: #ff9900;
+  }
+  .hold {
+    background-color: #f9ecec;
+    color: #b52a2a;
+  }
+  .menu-button {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .checkbox-cell input[type="checkbox"] {
+    width: 0.9rem;
+    position: relative;
+    top: 2px;
+    left: 2rem;
+    cursor: pointer;
+
+  }
+
+  /* Responsive Styles 
+  <div class="customer-container">
+    <div class="header-customers">
+      <div class="search-box-customers">
+            <input type="text" id="searchInput" placeholder="Search Customer..." onkeyup="searchCustomer()">
+      </div>
+    </div>

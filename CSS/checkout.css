@@ -1,0 +1,342 @@
+.container-checkout {
+    padding: 50px;
+    max-width: 1200px;
+    margin: auto;
+    background: #f5f5f5;
+    border-radius: 10px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+  }
+
+  .address {
+    display: flex;
+    gap: 20px;
+  }
+  #customer-address, #customer-region{
+    font-size: 1em;
+    color: #333;
+  }
+  .chevron-right {
+    font-size: 18px;
+    color: #999;
+    margin-top: 20px;
+    width: 50px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .address-icon{
+    font-size: 18px;
+    color: red;
+    margin-top: 20px;
+    width: 50px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 1em;
+  }
+
+  .phone {
+    color: gray;
+    font-size: 0.9em;
+    margin-left: 1rem;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .item-img {
+    width: 120px;
+    height: 120px;
+  }
+  .item-info {
+    flex: 1;
+  }
+  .item-info .price{
+    font-weight: 500;
+    margin-top: 4px;
+    font-size: 1em;
+    color: #000000ab;
+    margin-top: 1.5em;
+  }
+  .item-info p{
+    font-weight: 600;
+    font-size: 1.2em;
+    margin-top: 4px;
+  }
+  .item-info .qty{
+    font-size: 0.9em;
+    color: #000000cb;
+    margin-top: 4px;
+    float:right;
+  }
+  .card.protection {
+    display: flex;
+    gap: 2px;
+  }
+
+  .protection-info {
+    flex: 1;
+    line-height: 1.5;
+    padding: 0 15px;
+  }
+  .protection-info strong{
+    font-weight: 500;
+    font-size: 1.2em;
+  }
+  .protection-info p{
+    font-weight: 400;
+    font-size: 1em;
+    margin-top: 8px;
+  }
+  .protection-info a{
+    color: #039B9B;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .protection-info .price {
+    float: right;
+    font-weight: 300;
+  }
+  .section h4 {
+    margin: 0 0 5px;
+    font-size: 1.0em;
+    font-weight: 600;
+    width: 100%;
+  }
+
+  .shipping-box {
+    border: 1px solid #21ba45;
+    border-radius: 8px;
+    padding: 15px 10px;
+    color: #21ba45;
+    background-color: #f9fff9;
+  }
+
+  .shipping-box .shipping-type {
+    font-weight: 500;
+    color: black;
+  }
+
+  .shipping-box .shipping-price {
+    float: right;
+    color: black;
+  }
+
+  .guarantee {
+    font-size: 0.9em;
+    margin-top: 4px;
+    color: #21ba45;
+    font-weight: 500;
+  }
+  .guarantee-span {
+    font-size: 0.9em;
+    margin-top: 4px;
+    color: #7D7474;
+    font-weight: 500;
+  }
+  .payment-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+.payment-details h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.payment-details .subtotal, .payment-details .total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.payment-details .subtotal span{
+    font-weight: 400;
+    color: #545454;
+    font-size: 1em;
+}
+.payment-details .total {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.payment-details hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+.payment-radio {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  box-shadow: none;
+}
+  .button-wrapper {
+    text-align: center;
+  }
+
+  .place-order {
+    background: #7B0000;
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 30%;
+  }
+
+  .line-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2px 0;
+  }
+  .line-item p {
+    font-size: 1em;
+    font-weight: 500;
+    width: 20rem;
+  }
+  .muted {
+    color: #000000cb;
+    font-size: 0.9em;
+    font-weight: 400;
+    margin-left: 20rem;
+    width: 20rem;
+  }
+
+  .shipping-total {
+    font-size: 1em;
+    font-weight: 400;
+    color: #000000cb;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .total-item {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000000bd;
+  }
+  .payment-method {
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    background-color: #fff;
+}
+.payment-method h4 {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #000000;
+    text-align: left;
+    width: 50%;
+}
+.payment-method i{
+  color: #999;
+    margin-left: 10px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.payment-option img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    object-fit: contain;
+}
+.payment-option label {
+    flex-grow: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 25px;
+  z-index: 1000;
+  width: 764px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.modal-content h3{
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 500;
+}
+.modal-content input {
+  font-size: 1em;
+  font-weight: 400;
+  box-shadow: none;
+  border: 1px solid #7B0000;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
+
+.edit-button, .save-button, .cancel-button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  width: 10%;
+}
+.edit-button{
+  background-color: white;
+  margin-left: 13rem;
+  width: 10%;
+  font-size: 1.1em;
+  color: #999;
+  align-items: center;
+}
+.save-button, .cancel-button{
+  background-color: #7B0000;
+  width: 20%;
+  font-size: 1em;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 10px 25px;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
