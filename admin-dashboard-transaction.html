@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./CSS/index.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard.css">
+        <link rel="stylesheet" href="./CSS/dashboard-product.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard-orders.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard-customer.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard-transaction.css">
+        <script src="https://kit.fontawesome.com/e588cb9d47.js"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss"></script>
+        <title>William's Dashboard</title>
+    </head>
+    <body>
+        <div class="dash-sidebar">
+            <div class="dash-logo">
+                <img src="assets/williams.png" alt="William's Logo">
+            </div>
+            <nav>
+                <a href="admin-dashboard.html"><i class="fa-solid fa-gauge"></i>
+                    Dashboard</a>
+                <a href="admin-dashboard-product.html"><i
+                        class="fa-solid fa-box"></i>
+                    Products</a>
+                <a href="admin-dashboard-orders.html"><i class="fa-solid fa-cart-shopping"></i> Orders</a>
+                <a href="admin-dashboard-customer.html"><i class="fa-solid fa-users"></i>
+                    Customers</a>
+                <a href="admin-dashboard-salesreport.html"><i class="fa-solid fa-chart-line"></i> Sales
+                    Reports</a>
+                <a href="admin-dashboard-transaction.html" class="active"><i class="fa-solid fa-money-bill-transfer"></i>
+                    Transactions</a>
+                <a href="#"><i class="fa-solid fa-calendar-check"></i>
+                    Reservations</a>
+                <a href="admin-dashboard-appointment.html"><i class="fa-solid fa-calendar-days"></i>
+                    Appointments</a>
+                <a href="#"><i class="fa-solid fa-truck"></i> Shipping &
+                    Delivery</a>
+            </nav>
+        </div>
+    </div>
+    <div class="dash-main">
+        <div class="dash-topbar">
+            <div class="dash-search-box">
+                <div class="search-container">
+                    <input type="text" placeholder="Search William's...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+            </div>
+            <div class="dash-top-icons">
+                <i class="fa-solid fa-bell"
+                    onclick="toggleNotificationModal()"></i>
+                <i class="fa-solid fa-envelope"
+                    onclick="toggleMessageModal()"></i>
+            </div>
+            <div class="dash-profile">
+                <img src="assets/logo.png" alt="profile">
+                <div class="profile-info">
+                    <div class="profile-name">William</div>
+                    <div class="profile-role">Administrator</div>
+                </div>
+                <div class="admin-chevron-down" onclick="toggleLogoutMenu()">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div id="logout-menu" class="logout-menu"
+                    style="display: none;">
+                    <a href="logout.html">Logout</a>
+                </div>
+
+                <!-- Notification Modal -->
+                <div id="notificationModal" class="modal"
+                    style="display: none;">
+                    <div class="modal-content">
+                        <span class="close"
+                            onclick="toggleNotificationModal()">&times;</span>
+                        <h3>Notifications</h3>
+                        <ul>
+                            <li>No new notifications</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Message Modal -->
+                <div id="messageModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close"
+                            onclick="toggleMessageModal()">&times;</span>
+                        <h3>Messages</h3>
+                        <ul>
+                            <li>No new messages</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trans-container">
+            <div class="trans-header">
+              <div class="trans-actions">
+                <div class="trans-search">
+                  <input type="text" id="transSearchInput" placeholder="Search transaction...." onkeyup="filterTransactions()">
+                </div>
+                <select class="trans-sort" onchange="sortTable()">
+                  <option value="newest">Newest</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+                <button class="trans-export" onclick="exportTableToCSV('transactions.csv')">Export</button>
+              </div>
+            </div>
+            <table class="trans-table" id="transTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Date</th>
+                  <th>Order ID</th>
+                  <th>Transaction</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="trans-avatar">R</span> Riyad Ahmad</td>
+                  <td>01 Sep 2024</td>
+                  <td>#001127</td>
+                  <td>Rent</td>
+                  <td><span class="trans-status status-success">Success</span></td>
+                  <td>₱ 10,500.00</td>
+                </tr>
+                <tr>
+                  <td><span class="trans-avatar">P</span> Parvej Reza</td>
+                  <td>01 Sep 2024</td>
+                  <td>#001128</td>
+                  <td>Rent</td>
+                  <td><span class="trans-status status-success">Success</span></td>
+                  <td>₱ 3,500.00</td>
+                </tr>
+                <tr>
+                  <td><span class="trans-avatar">C</span> Chaysee</td>
+                  <td>02 Sep 2024</td>
+                  <td>#001158</td>
+
+                  <td>Rent</td>
+                  <td><span class="trans-status status-cancel">Cancel</span></td>
+                  <td>₱ 5,500.00</td>
+                </tr>
+                <tr>
+                  <td><span class="trans-avatar">M</span> Mike D</td>
+                  <td>02 Sep 2024</td>
+                  <td>#001158</td>
+                  <td>Rent</td>
+                  <td><span class="trans-status status-progress">Progress</span></td>
+                  <td>₱ 9,500.00</td>
+                </tr>
+                <tr>
+                    <td><span class="trans-avatar">M</span> Luigi Bulatao</td>
+                    <td>02 Sep 2024</td>
+                    <td>#001158</td>
+                    <td>Rent</td>
+                    <td><span class="trans-status status-progress">Progress</span></td>
+                    <td>₱ 6,650.00</td>
+                  </tr>
+                  <tr>
+                    <td><span class="trans-avatar">M</span> Kristian H</td>
+                    <td>02 Sep 2024</td>
+                    <td>#001158</td>
+                    <td>Rent</td>
+                    <td><span class="trans-status status-progress">Progress</span></td>
+                    <td>₱ 7,500.00</td>
+                  </tr>
+                <!-- Add more rows as needed -->
+              </tbody>
+            </table>
+            <div class="trans-pagination">
+              <div>Showing 1-10 of 56</div>
+              <div class="trans-pages">
+                <button>&larr; Previous</button>
+                <button class="active">01</button>
+                <button>02</button>
+                <button>03</button>
+                <button>Next &rarr;</button>
+              </div>
+            </div>
+          </div>
+          <script src="./JS/admin-logout.js"></script>
+          <script src="./JS/notif&message.js"></script>
+          <script src="./JS/admin-dashboard-transaction.js"></script>
+            <script>
+                    function exportTableToCSV(filename) {
+                    const csv = [];
+                    const table = document.getElementById("transTable");
+                    const rows = table.querySelectorAll("tr");
+
+                    rows.forEach(row => {
+                      const cols = row.querySelectorAll("td, th");
+                      const rowData = Array.from(cols).map(col => `"${col.textContent.trim().replace(/"/g, '""')}"`);
+                      csv.push(rowData.join(","));
+                    });
+
+                    const csvContent = "data:text/csv;charset=utf-8," + csv.join("\n");
+                    const encodedUri = encodeURI(csvContent);
+                    const link = document.createElement("a");
+                    link.href = encodedUri;
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    }
+                </script>
+        </body>
+        </html>

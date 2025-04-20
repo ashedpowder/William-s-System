@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/index.css">
+    <link rel="stylesheet" href="./CSS/shopping-cart.css">
+    <link rel="stylesheet" href="./CSS/checkout.css">
+    <link rel="stylesheet" href="./CSS/order-complete.css">
+    <script src="https://kit.fontawesome.com/e588cb9d47.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss"></script>
+    <title>William's Order Complete</title>
+</head>
+    <!--Navigation and Header Section-->
+    <header class="header">
+        <div class="nametag">
+            <img src="assets/williams.png" alt="Williams Logo">
+        </div>
+        <section class="leftheader">
+            <div class="SContainer">
+                <input type="search" placeholder="Search William's....">
+                <img src="assets/Trailing-Elements.png" alt="">
+            </div>
+            <img src="assets/notif-bell.png" alt="Notification Bell" class="icon" style="cursor: pointer;">
+            <img src="assets/shopping-cart.png" alt="Shopping Cart" class="icon" style="cursor: pointer;">
+            <img id="myAvatar" src="assets/Generic-avatar.png" alt="User Icon" style="cursor: pointer;">
+        </section>
+    </header>
+    <section class="navigation">
+        <div>
+            <h3>Music</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <div>
+            <h3>Sports</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <h3>Services</h3>
+        <h3 class="ab">About us</h3>
+    </section>
+
+<!--Main Section-->
+<div class="container">
+    <div class="progress-bar">
+      <div class="step">
+        <div class="step-content">
+          <div class="circle">1</div>
+          <div class="label">Shopping Cart</div>
+        </div>
+        <div class="line" active ></div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <div class="circle">2</div>
+          <div class="label">Checkout</div>
+        </div>
+        <div class="line"></div>
+      </div>
+      <div class="step active">
+      <div class="step">
+        <div class="step-content">
+          <div class="circle">3</div>
+          <div class="label">Order Complete</div>
+        </div>
+      </div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <button class="back-button">
+      <span class="arrow"><i class="fa-solid fa-chevron-left"></i></span> Continue Shopping
+    </button>
+  </div>
+
+  <div class="container-order-complete">
+  <div class="wrapper">
+    <h1>Hi Kristian!</h1>
+    <p>Your order has been confirmed and will be shipping soon.</p>
+    <h2>Your order has been received</h2>
+    <div class="details">
+        <div>
+            <img src="assets/ball.png" alt="Basketball">
+            <span class="qty">2</span>
+        </div>
+        <div>
+            <img src="assets/Yamaha FG800.png" alt="Guitar">
+            <span class="qty">2</span>
+        </div>
+        <div>
+            <div class="order-complete-total">
+                <img src="assets/image 34.png" alt="Order Icon"> <span class="label">Order ID:</span>
+            <span class="info">325487291</span>
+        </div>
+    </div>
+        <div>
+            <div class="order-complete-total">
+                <img src="assets/image 35.png" alt="Date Icon"><span class="label">Date:</span>
+            <span class="info">27 Jan 2025</span>
+        </div>
+        </div>
+        <div>
+            <div class="order-complete-total">
+                <img src="assets/image 36.png" alt="Total Icon"><span class="label">Total:</span>
+            <span class="info">₱ 20,036.00</span>
+        </div>
+    </div>
+        <div> <div class="order-complete-total">
+            <img src="assets/image 37.png" alt="Payment Method"><span class="label">Payment method:</span>
+            <span class="info" style="color: #8D0101">Cash on Delivery</span>
+        </div>
+    </div>
+</div>
+    <div class="success-icon"><img src="assets/Group 57.png"></div>
+
+    <a href="shopping-cart.html" class="return-btn"><i class="fa-solid fa-chevron-left"></i>Back to Shop</a>
+</div>
+</div>
+</body>
+</html>

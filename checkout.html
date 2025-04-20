@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/index.css">
+    <link rel="stylesheet" href="./CSS/shopping-cart.css">
+    <link rel="stylesheet" href="./CSS/checkout.css">
+    <script src="https://kit.fontawesome.com/e588cb9d47.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss"></script>
+    <title>William's Shopping Cart</title>
+</head>
+<body>
+    <!--Navigation and Header Section-->
+    <header class="header">
+        <div class="nametag">
+            <img src="assets/williams.png" alt="Williams Logo">
+        </div>
+        <section class="leftheader">
+            <div class="SContainer">
+                <input type="search" placeholder="Search William's....">
+                <img src="assets/Trailing-Elements.png" alt="">
+            </div>
+            <img src="assets/notif-bell.png" alt="Notification Bell" class="icon" style="cursor: pointer; font-size: small;">
+            <img src="assets/shopping-cart.png" alt="Shopping Cart" class="icon" style="cursor: pointer;">
+            <img id="myAvatar" src="assets/Generic-avatar.png" alt="User Icon" style="cursor: pointer;">
+        </section>
+    </header>
+    <section class="navigation">
+        <div>
+            <h3>Music</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <div>
+            <h3>Sports</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <h3>Services</h3>
+        <h3 class="ab">About us</h3>
+    </section>
+
+<!--Main Section-->
+<div class="container">
+    <div class="progress-bar">
+      <div class="step">
+        <div class="step-content">
+          <div class="circle">1</div>
+          <div class="label">Shopping Cart</div>
+        </div>
+        <div class="line" active ></div>
+      </div>
+     <div class="step active">
+      <div class="step">
+        <div class="step-content">
+          <div class="circle">2</div>
+          <div class="label">Checkout</div>
+        </div>
+        <div class="line"></div>
+      </div>
+     </div>
+      <div class="step">
+        <div class="step-content">
+          <div class="circle">3</div>
+          <div class="label">Order Complete</div>
+        </div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <button class="back-button">
+      <span class="arrow"><i class="fa-solid fa-chevron-left"></i></span> Continue Shopping
+    </button>
+  </div>
+   <!-- Address Section -->
+  <div class="container-checkout">
+    <div class="card">
+      <div class="address">
+        <span class="address-icon"><i class="fa-solid fa-location-dot"></i></span>
+        <div id="customer-details">
+          <strong id="customer-name">Kristian Lloyd Hernandez</strong> <span class="phone" id="customer-phone">(+63) 123 456 7890</span><br />
+          <span id="customer-address">123, Tinejero Pulilan, Bulacan</span><br/>
+          <span id="customer-region">Pulilan, Bulacan, North Luzon, 3005</span>
+        </div>
+        <button id="edit-address" class="edit-button">Edit</button>
+      </div>
+    </div>
+
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Edit Address</h3>
+      <label for="name">Name:</label>
+      <input type="text" id="edit-name" value="Kristian Lloyd Hernandez"><br>
+      <label for="phone">Phone:</label>
+      <input type="text" id="edit-phone" value="(+63) 123 456 7890"><br>
+      <label for="address">Address:</label>
+      <input type="text" id="edit-address-field" value="123, Tinejero Pulilan, Bulacan"><br>
+      <label for="region">Region:</label>
+      <input type="text" id="edit-region" value="Pulilan, Bulacan, North Luzon, 3005"><br>
+      <div class="modal-button">
+      <button id="save-address" class="save-button">Save</button>
+      <button id="cancel-edit" class="cancel-button">Cancel</button>
+    </div>
+  </div>
+  </div>
+    <!-- Item Section -->
+    <div class="card">
+      <div class="item">
+        <img src="assets/Yamaha FG800.png" alt="Guitar" class="item-img" />
+        <div class="item-info">
+          <p>Yamaha FG800</p>
+          <div id="price">₱15,000.00</div>
+          <div id="qty">x1</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item">
+        <img src="assets/Yamaha FG800.png" alt="Guitar" class="item-img" />
+        <div class="item-info">
+          <p>Yamaha FG800</p>
+          <div id="price">₱15,000.00</div>
+          <div id="qty">x1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Protection Section -->
+    <div class="card protection">
+      <input type="checkbox" checked class="custom-checkbox">
+      <div class="protection-info">
+        <div><strong>Merchandise Protection</strong> <span class="price">₱45</span></div>
+        <p>Protect your items from total loss due to accidental damage and liquid damage where the original item is beyond repair <a href="#">Learn more</a>.</p>
+      </div>
+    </div>
+
+      <!-- Message & Receipt Section -->
+      <div class="card">
+        <div class="section">
+          <div class="line-item">
+        <p>Message for Seller</p>
+        <span class="muted" id="message-placeholder">Please leave a message</span>
+        <div class="chevron-right"><i class="fa-solid fa-chevron-right"></i></div>
+          </div>
+          <div class="line-item">
+        <p>E-receipt</p>
+        <span class="muted" id="receipt-placeholder">Request Now</span>
+        <div class="chevron-right"><i class="fa-solid fa-chevron-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal for Message -->
+      <div id="message-modal" class="modal hidden">
+        <div class="modal-content">
+          <h3>Message for Seller</h3>
+          <textarea id="message-input" rows="4" placeholder="Enter your message here..."></textarea>
+          <div class="modal-button">
+          <button id="save-message" class="save-button">Save</button>
+          <button id="cancel-message" class="cancel-button">Cancel</button>
+        </div>
+      </div>
+      </div>
+
+      <!-- Modal for E-receipt -->
+      <div id="receipt-modal" class="modal hidden">
+        <div class="modal-content">
+          <h3>Request E-receipt</h3>
+          <p>Do you want to request an E-receipt?</p>
+          <div class="modal-button">
+          <button id="confirm-receipt" class="save-button">Yes</button>
+          <button id="cancel-receipt" class="cancel-button">No</button>
+        </div>
+      </div>
+  </div>
+      <!-- Shipping Option -->
+      <div class="card">
+        <div class="section">
+          <div class="line-item">
+            <h4>Shipping Option</h4>
+            <span class="muted">View All</span>
+            <div class="chevron-right"><i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+          <div class="shipping-box">
+            <div class="shipping-type">Standard Local <span class="shipping-price">₱36</span></div>
+            <div class="guarantee">Guaranteed to get by 28–31 Jan</div>
+            <span class="guarantee-span">Get ₱50 shop voucher if not attempted by 31 Jan 2025</span>
+          </div>
+          <div class="shipping-total">
+            <p>Total Item(s)</p><span class="total-item">₱30,036.00</span>
+        </div>
+      </div>
+  </div>
+
+    <!-- Payment Method -->
+    <div class="card">
+      <div class="section">
+        <div class="payment-method">
+          <h4>Payment Method</h4> 
+          <a href="#">View All<i class="fa-solid fa-chevron-right"></i></a>
+          <div class="payment-option">
+              <img src="assets/cash-on-delivery-icon-1024x345-7sgjf338.png" alt="Cash on Delivery">
+              <label for="cod">Cash on Delivery</label>
+                <input type="radio" id="cod" name="payment" class="payment-radio">
+          </div>
+          <div class="payment-option">
+              <img src="assets/gcash-seeklogo.png" alt="G-cash">
+              <label for="gcash">G-cash</label>
+              <input type="radio" id="cod" name="payment" class="payment-radio">
+          </div>
+          <div class="payment-option">
+              <img src="assets/maya-logo_brandlogos.net_y6kkp.png" alt="Paymaya">
+              <label for="paymaya">Paymaya</label>
+              <input type="radio" id="cod" name="payment" class="payment-radio">
+          </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Payment Summary -->
+    <div class="card">
+      <div class="payment-details">
+      <h2>Payment Details</h2>
+      <div class="subtotal">
+        <span>Merchandise Subtotal</span>
+        <span id="merchandise-subtotal">₱15,045.00</span>
+      </div>
+      <div class="subtotal">
+        <span>Shipping Subtotal</span>
+        <span id="shipping-subtotal">₱36</span>
+      </div>
+      <hr>
+      <div class="total">
+        <span>Total Payment</span>
+        <span id="total-payment">₱15,081.00</span>
+      </div>
+    </div>
+    </div>
+    <!-- Button -->
+    <div class="button-wrapper">
+      <a href="order-complete.html"><button class="place-order">Place Order</button></a>
+    </div>
+  </div>
+  <script src="JS/edit-modal.js"></script>
+  <script src="JS/request-receipt&message.js"></script>
+  <script src="JS/checkout.js"></script>
+</body>
+</html>

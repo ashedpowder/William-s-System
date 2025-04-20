@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./CSS/index.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard.css">
+        <link rel="stylesheet" href="./CSS/dashboard-product.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard-orders.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard-customer.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard-transaction.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard-salesreport.css">
+
+        <script src="https://kit.fontawesome.com/e588cb9d47.js"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss"></script>
+        <title>William's Dashboard</title>
+    </head>
+    <body>
+        <div class="dash-sidebar">
+            <div class="dash-logo">
+                <img src="assets/williams.png" alt="William's Logo">
+            </div>
+            <nav>
+                <a href="admin-dashboard.html"><i class="fa-solid fa-gauge"></i>
+                    Dashboard</a>
+                <a href="admin-dashboard-product.html"><i
+                        class="fa-solid fa-box"></i>
+                    Products</a>
+                <a href="admin-dashboard-orders.html"><i
+                        class="fa-solid fa-cart-shopping"></i> Orders</a>
+                <a href="admin-dashboard-customer.html"><i
+                        class="fa-solid fa-users"></i>
+                    Customers</a>
+                <a href="admin-dashboard-salesreport.html" class="active"><i
+                        class="fa-solid fa-chart-line"></i> Sales
+                    Reports</a>
+                <a href="admin-dashboard-transaction.html"><i
+                        class="fa-solid fa-money-bill-transfer"></i>
+                    Transactions</a>
+                <a href="#"><i class="fa-solid fa-calendar-check"></i>
+                    Reservations</a>
+                <a href="admin-dashboard-appointment.html"><i
+                        class="fa-solid fa-calendar-days"></i>
+                    Appointments</a>
+                <a href="#"><i class="fa-solid fa-truck"></i> Shipping &
+                    Delivery</a>
+            </nav>
+        </div>
+    </div>
+    <div class="dash-main">
+        <div class="dash-topbar">
+            <div class="dash-search-box">
+                <div class="search-container">
+                    <input type="text" placeholder="Search William's...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+            </div>
+            <div class="dash-top-icons">
+                <i class="fa-solid fa-bell"
+                    onclick="toggleNotificationModal()"></i>
+                <i class="fa-solid fa-envelope"
+                    onclick="toggleMessageModal()"></i>
+            </div>
+            <div class="dash-profile">
+                <img src="assets/logo.png" alt="profile">
+                <div class="profile-info">
+                    <div class="profile-name">William</div>
+                    <div class="profile-role">Administrator</div>
+                </div>
+                <div class="admin-chevron-down" onclick="toggleLogoutMenu()">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div id="logout-menu" class="logout-menu"
+                    style="display: none;">
+                    <a href="logout.html">Logout</a>
+                </div>
+
+                <!-- Notification Modal -->
+                <div id="notificationModal" class="modal"
+                    style="display: none;">
+                    <div class="modal-content">
+                        <span class="close"
+                            onclick="toggleNotificationModal()">&times;</span>
+                        <h3>Notifications</h3>
+                        <ul>
+                            <li>No new notifications</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Message Modal -->
+                <div id="messageModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close"
+                            onclick="toggleMessageModal()">&times;</span>
+                        <h3>Messages</h3>
+                        <ul>
+                            <li>No new messages</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sales Report Section -->
+        <div class="dashboard-header">
+            <h1>Sales report</h1>
+            <button class="btn-report"><i
+                    class="fa-solid fa-file-arrow-down"></i>Report</button>
+        </div>
+
+        <div class="info-cards">
+            <div class="info-card">
+                <h3>Net profit</h3>
+                <div class="value">₱ 30,500.00</div>
+                <div class="growth up">+12%</div>
+            </div>
+            <div class="info-card">
+                <h3>Products sold</h3>
+                <div class="value">300</div>
+                <div class="growth down">-0.5%</div>
+            </div>
+            <div class="info-card">
+                <h3>Transactions</h3>
+                <div class="value">2,500.00</div>
+                <div class="growth up">+3%</div>
+            </div>
+            <div class="info-card">
+                <h3>Customers</h3>
+                <div class="value">950</div>
+                <div class="growth down">-1%</div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h3>Net profit • <span class="net-profit-year"
+                    id="currentYear"></span></h3>
+            <canvas id="netProfitChart" width="950" height="300"
+                style="margin-top: 20px;"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        </div>
+        <div class="bottom-card">
+            <h4>Top products</h4>
+            <table>
+                <tr><td>Acoustic Guitars</td><td class="growth up">+7%</td><td
+                        class="highlight">654 836</td></tr>
+                <tr><td>Electric Guitars</td><td class="growth down">-2%</td><td
+                        class="highlight">876 193</td></tr>
+                <tr><td>Basketball Equipment</td><td
+                        class="growth up">+4%</td><td
+                        class="highlight">438 430</td></tr>
+            </table>
+        </div>
+        <div class="bottom-card">
+            <h4>Customers</h4>
+            <table>
+                <tr><td>All</td><td class="growth up">+27%</td><td
+                        class="highlight">968 543 006</td></tr>
+                <tr><td>Women</td><td>76%</td><td></td></tr>
+                <tr><td>Men</td><td>24%</td><td></td></tr>
+            </table>
+        </div>
+        <script src="./JS/admin-dashboard-salesreport.js"></script>
+        <script src="./JS/admin-logout.js"></script>
+        <script src="./JS/notif&message.js"></script>
+        <script src="./JS/admin-dashboard-sales-download-report.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const currentYear = new Date().getFullYear();
+                document.getElementById('currentYear').textContent = currentYear;
+            });
+        </script>
+    </body>
+</html>

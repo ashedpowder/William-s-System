@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/index.css">
+    <link rel="stylesheet" href="./CSS/admin-dashboard.css">
+    <link rel="stylesheet" href="./CSS/admin-dashboard-product.css">
+    <link rel="stylesheet" href="./CSS/admin-dashboard-orders.css">
+    <script src="https://kit.fontawesome.com/e588cb9d47.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss"></script>
+    <title>William's Dashboard</title>
+</head>
+<body>
+    <div class="dash-sidebar">
+        <div class="dash-logo">
+         <img src="assets/williams.png" alt="William's Logo">
+        </div>
+        <nav>
+          <a href="#" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+          <a href="admin-dashboard-product.html"><i class="fa-solid fa-box"></i> Products</a>
+          <a href="admin-dashboard-orders.html"><i class="fa-solid fa-cart-shopping"></i> Orders</a>
+          <a href="admin-dashboard-customer.html"><i class="fa-solid fa-users"></i> Customers</a>
+          <a href="admin-dashboard-salesreport.html"><i class="fa-solid fa-chart-line"></i> Sales Reports</a>
+          <a href="admin-dashboard-transaction.html"><i class="fa-solid fa-money-bill-transfer"></i> Transactions</a>
+          <a href="#"><i class="fa-solid fa-calendar-check"></i> Reservations</a>
+          <a href="admin-dashboard-appointment.html"><i class="fa-solid fa-calendar-days"></i> Appointments</a>
+          <a href="#"><i class="fa-solid fa-truck"></i> Shipping & Delivery</a>
+        </nav>
+      </div>
+    </div>
+    <div class="dash-main">
+      <div class="dash-topbar">
+          <div class="dash-search-box">
+              <div class="search-container">
+                  <input type="text" placeholder="Search William's...">
+                  <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              </div>
+          </div>
+          <div class="dash-top-icons">
+              <i class="fa-solid fa-bell" onclick="toggleNotificationModal()"></i>
+              <i class="fa-solid fa-envelope" onclick="toggleMessageModal()"></i>
+          </div>
+          <div class="dash-profile">
+              <img src="assets/logo.png" alt="profile">
+              <div class="profile-info">
+                  <div class="profile-name">William</div>
+                  <div class="profile-role">Administrator</div>
+              </div>
+              <div class="admin-chevron-down" onclick="toggleLogoutMenu()">
+                  <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div id="logout-menu" class="logout-menu" style="display: none;">
+                  <a href="logout.html">Logout</a>
+              </div>
+
+      <!-- Notification Modal -->
+      <div id="notificationModal" class="modal" style="display: none;">
+          <div class="modal-content">
+              <span class="close" onclick="toggleNotificationModal()">&times;</span>
+              <h3>Notifications</h3>
+              <ul>
+                  <li>No new notifications</li>
+              </ul>
+          </div>
+      </div>
+
+      <!-- Message Modal -->
+      <div id="messageModal" class="modal" style="display: none;">
+          <div class="modal-content">
+              <span class="close" onclick="toggleMessageModal()">&times;</span>
+              <h3>Messages</h3>
+              <ul>
+                  <li>No new messages</li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+        <div class="dash-content">
+          <div class="dash-tabs">
+            <a href="#">Today</a>
+            <a href="#">Weekly</a>
+            <a href="#">Monthly</a>
+            <a href="#">Yearly</a>
+          </div>
+            <div class="dash-cards">
+            <div class="dash-card">
+              <h3>Total Sales</h3>
+              <p id="total-sales">0</p>
+            </div>
+            <div class="dash-card">
+              <h3>Order Count</h3>
+              <p id="order-count">0</p>
+            </div>
+            <div class="dash-card">
+              <h3>Total Customers</h3>
+              <p id="total-customers">0</p>
+            </div>
+            <div class="dash-card">
+              <h3>Online Orders</h3>
+              <p id="online-orders">0</p>
+            </div>
+            </div>
+          <div class="dash-grid">
+            <div class="dash-overview">
+              <h3>Sales Overview</h3>
+              <div style="text-align: right; font-size: 1rem; margin-top: -32px;">2025</div>
+              <canvas id="salesChart" style="width:100%; height: 220px; margin-top: 10px;"></canvas>
+            </div>
+            <div class="dash-categories">
+              <h3>Top Selling Categories</h3>
+              <canvas id="categoriesChart" class="dash-pie-chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <script src="./JS/admin-logout.js"></script>
+      <script src="./JS/notif&message.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+      <script src="./JS/admin-dashboard-sales.js"></script>
+
+      <script>
+        // Example JavaScript to dynamically update the dashboard cards
+        document.addEventListener("DOMContentLoaded", function () {
+          const totalSales = document.getElementById("total-sales");
+          const orderCount = document.getElementById("order-count");
+          const totalCustomers = document.getElementById("total-customers");
+          const onlineOrders = document.getElementById("online-orders");
+
+          // Simulated data (replace with actual data from your backend or API)
+          const data = {
+            totalSales: 5000,
+            orderCount: 125,
+            totalCustomers: 23,
+            onlineOrders: 69
+          };
+
+          // Update the card values
+          totalSales.textContent = data.totalSales.toLocaleString();
+          orderCount.textContent = data.orderCount;
+          totalCustomers.textContent = data.totalCustomers;
+          onlineOrders.textContent = data.onlineOrders;
+        });
+        </script>
+  </body>
+  </html>

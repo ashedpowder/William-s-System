@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/index.css">
+    <link rel="stylesheet" href="./CSS/shopping-cart.css">
+    <link rel="stylesheet" href="./CSS/checkout.css">
+    <link rel="stylesheet" href="./CSS/services-fullsetup.css">
+    <script src="https://kit.fontawesome.com/e588cb9d47.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss"></script>
+    <title>William's Shopping Cart</title>
+</head>
+<body>
+    <!--Navigation and Header Section-->
+    <header class="header">
+        <div class="nametag">
+            <a href="shopping-cart.html"><img src="assets/williams.png" alt="Williams Logo"></a>
+        </div>
+        <section class="leftheader">
+            <div class="SContainer">
+                <input type="search" placeholder="Search William's....">
+                <img src="assets/Trailing-Elements.png" alt="">
+            </div>
+            <img src="assets/notif-bell.png" alt="Notification Bell" class="icon" style="cursor: pointer; font-size: small;">
+            <img src="assets/shopping-cart.png" alt="Shopping Cart" class="icon" style="cursor: pointer;">
+            <img id="myAvatar" src="assets/Generic-avatar.png" alt="User Icon" style="cursor: pointer;">
+        </section>
+    </header>
+    <section class="navigation">
+        <div>
+            <h3>Music</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <div>
+            <h3>Sports</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <h3>Services</h3>
+        <h3 class="ab">About us</h3>
+    </section>
+
+    <div class="fullsetup-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="hamburger-menu">
+            <i class="fa-solidfa-bars" id="hamburger-icon" style="cursor: pointer;"></i>
+          </div>
+          <h2>Categories</h2>
+          <h3>Services</h3>
+          <div class="category-section">
+            <details>
+              <summary class="full-setup">Full Setup</summary>
+              <ul>
+            <li><a href="#fret-leveling">Fret leveling and Crowning</a></li>
+            <li><a href="#string-height">String Height Adjustment</a></li>
+            <li><a href="#fretboard-recondition">Fretboard Recondition</a></li>
+            <li><a href="#intonation-accuracy">Intonation Accuracy</a></li>
+            <li><a href="#fretwires-polishing">Fretwires Polishing</a></li>
+            <li><a href="#neck-relief">Neck Relief</a></li>
+            <li><a href="#cleaning">Cleaning</a></li>
+              </ul>
+            </details>
+          </div>
+          <div class="category-section">
+            <details>
+              <summary class="basic-setup">Basic Setup</summary>
+              <ul>
+            <li><a href="services-basicsetup.html">String Radius Adjustment</a></li>
+            <li><a href="#fretboard-recondition">Fretboard Recondition</a></li>
+            <li><a href="#intonation-accuracy">Intonation Accuracy</a></li>
+            <li><a href="#right-neck-relief">Right Neck Relief</a></li>
+            <li><a href="#minor-cleaning">Minor Cleaning</a></li>
+              </ul>
+            </details>
+          </div>
+          <div class="filter-section">
+            <h3>Search Filter</h3>
+            <input type="text" placeholder="Search..." />
+            <h3>Price Range</h3>
+            <div class="price-range">
+              <input type="number" placeholder="MIN" />
+              <input type="number" placeholder="MAX" />
+         </div>
+         <div class="apply-button">Apply</div>
+            <div class="guitar-type">
+              <input type="checkbox" id="bass-guitar" />
+              <label for="bass-guitar">Bass Guitar</label><br>
+              <input type="checkbox" id="acoustic-guitar" checked />
+              <label for="acoustic-guitar">Acoustic Guitar</label><br>
+              <input type="checkbox" id="electric-guitar" />
+              <label for="electric-guitar">Electric Guitar</label>
+            </div>
+          </div>
+        </aside>
+        <!-- Main Content -->
+        <main class="main-content">
+          <div class="sort-options">
+            <button class="btn-sort">Recommended</button>
+            <button class="btn-popular">Popular</button>
+          </div>
+          <div class="services-grid">
+            <div class="service-item">
+              <img src="assets/drive-download-20250310T045422Z-001/fretleveling.png" alt="Fret leveling and Crowning" />
+              <h4>Fret leveling and Crowning</h4>
+              <p>₱800 - ₱900</p>
+            </div>
+            <div class="service-item">
+              <img src="assets/drive-download-20250310T045422Z-001/cleaning.png" alt="Cleaning" />
+              <h4>Cleaning</h4>
+              <p>₱800 - ₱900</p>
+            </div>
+            <div class="service-item">
+              <img src="assets/drive-download-20250310T045422Z-001/fretwire-polishing.png" alt="Fretwires Polishing" />
+              <h4>Fretwires Polishing</h4>
+              <p>₱800 - ₱900</p>
+            </div>
+            <div class="service-item">
+              <img src="assets/drive-download-20250310T045422Z-001/intonation-accuracy.png" alt="Intonation Accuracy" />
+              <h4>Intonation Accuracy</h4>
+              <p>₱800 - ₱900</p>
+            </div>
+            <div class="service-item">
+              <img src="assets/drive-download-20250310T045422Z-001/fretboard-recondition.png" alt="Fretboard Recondition" />
+              <h4>Fretboard Recondition</h4>
+              <p>₱800 - ₱900</p>
+            </div>
+            <div class="service-item">
+              <img src="assets/drive-download-20250310T045422Z-001/neck-relief.png" alt="Neck Relief" />
+              <h4>Neck Relief</h4>
+              <p>₱800 - ₱900</p>
+            </div>
+            <div class="service-item">
+                <img src="assets/drive-download-20250310T045422Z-001/string-height-adjustment.png" alt="Neck Relief" />
+                <h4>String Height Adjustment</h4>
+                <p>₱800 - ₱900</p>
+              </div>
+          </div>
+          <div class="pagination">
+            <div class="page-number current-page" data-page="1">1</div>
+            <div class="page-number" data-page="2">2</div>
+            <div class="page-number" data-page="3">3</div>
+            <div class="page-number" data-page="4">4</div>
+            <div class="page-number" data-page="5">5</div>
+            <div class="next-button">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
+        </main>
+      </div>
+      <script src="./JS/pagination.js"></script> 
+    </body>
+    </html>

@@ -1,0 +1,1015 @@
+index.php
+<?php
+// 1. Start session FIRST (before any output)
+session_start();
+
+// 2. Include database connection
+include 'phpProcesses/connection.php';
+
+// 3. Fetch products (with proper error handling)
+try {
+    $stmt = $conn->query("SELECT * FROM products");
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    // Handle errors gracefully
+    $products = []; // Fallback empty array
+    $_SESSION['error'] = "Failed to load products: " . $e->getMessage();
+}
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="css\index.css">
+    <link rel="stylesheet" href="css\registration.css">
+    <link rel="stylesheet" href="css\login.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="nametag">
+            <img src="assets/williams.png" alt="Williams Logo">
+        </div>
+        <section class="leftheader">
+            <div class="SContainer">
+                <input type="search" placeholder="Search William's....">
+                <img src="assets/Trailing-Elements.png" alt="">
+            </div>
+            <a href="#" id="signupLink" class="signup">Sign up</a>
+            <img id="myAvatar" src="assets/Generic-avatar.png" alt="User Icon" style="cursor: pointer;">
+        </section>
+    </header>
+    <section class="navigation">
+        <div>
+            <h3>Music</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <div>
+            <h3>Sports</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <h3>Services</h3>
+        <h3 class="ab">About us</h3>
+    </section>
+    <main id="dynamicContent">
+        <div class="maincontent">
+            <div class="maindiv1">
+                <img src="assets/landing-page-image.png" alt="">
+                <div class="dimmed"></div>
+                <div class="maindiv1_text">
+                    <h2>Explore the World of Music and Sports</h2>
+                    <p>Looking for High Quality Musical Instruments and Sports Equipment?<br>You are in the right place</p>
+                </div>
+            </div>
+            <div class="maindiv2">
+                <h3>Most popular</h3>
+                <hr>
+                <div class="carousel">
+                    <button class="carousel-button prev">&#10094;</button>
+                    <div class="carousel-grid">
+                        <div class="Item">
+                            <img src="" alt="">
+                            <p class="name"></p>
+                            <p class="price"></p>
+                        </div>
+                    </div>
+                    <button class="carousel-button next">&#10095;</button>
+                </div>
+            </div>
+            <div class="maindiv3">
+                <div class="imgcontdiv3-1">
+                    <img src="assets/landing-page-balls.png" alt="Instrument Image">
+                </div>
+                <div class="description">
+                    <p>Enhance Your Experience<br>With our Instruments and<br>Equipments</p>
+                    <ul>
+                        <li>Guaranteed New</li>
+                        <li>High Quality</li>
+                        <li>Original</li>
+                        <li>Wide variety</li>
+                        <li>Affordable</li>
+                    </ul>
+                    <button class="Buttonshop">Shop</button>
+                </div>
+                <div class="imgcontdiv3-2">
+                    <img src="assets/landing-page-guitar.png" alt="Sports Equipment">
+                </div>
+            </div>
+            <section class="appointment">
+                <div class="desccontainer">
+                    <p class="mainappointmentdesc">Revive the Harmony Precision Repairs for All Your Musical Instruments</p>
+                    <p class="subappointmentdesc">Get your guitar repaired, upgraded, or serviced by our experts—schedule your appointment today!</p>
+                </div>
+                <button class="booking">Book Appointment</button>
+            </section>
+            <div class="maindiv4">
+                <span class="AUimage">
+                    <img class="AUimg" src="assets/aboutUs.png" alt="Physical Shop Image">
+                </span>
+                <span class="aboutussec">
+                    <h2>About Us</h2>
+                    <p>Welcome to William's Record, your one-stop destination for all things musical and sports. Established in 1995, we have been passionately serving the music community with a diverse range of instruments, accessories, and sports equipment. Our mission is to inspire and support musicians at all levels, from beginners to seasoned professionals.</p>
+                </span>
+            </div>
+            <section class="brands">
+                <img src="assets/Brands.png" alt="Brands">
+            </section>
+            <footer class="footer">
+                <div class="footerleft">
+                    <img src="assets/logo.png" alt="Store Logo">
+                    <p>Music Store & Sporting <br>Goods</p>
+                </div>
+                <div class="divider"></div>
+                <div class="footerright">
+                    <h2 class="spacing">Store Location</h2>
+                    <p class="spacing">Cagayan Valley Road, Poblacion, Baliwag, Bulacan</p>
+                    <h2 class="spacing">Store Hours</h2>
+                    <h4 class="spacing">MON- SAT <br>9:00AM - 7:00PM</h4>
+                    <div class="socialmedias">
+                        <img src="assets/facebook.png" alt="Facebook">
+                        <img src="assets/phone-call.png" alt="Contact">
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <div class="overlay" id="overlay">
+        <section id="loginDisplay" class="loginDisplay">
+            <div class="loginContainer">
+                <div class="headerContainer">
+                    <img src="assets/logo.png" alt="Williams Logo">
+                    <p>William's<br>Record</p>
+                </div>
+                <div class="loginForm">
+                    <form id="loginForm" action="phpProcesses/login.php" method="POST">
+                        <label for="loginEmail">Email</label><br>
+                        <input type="email" id="loginEmail" name="loginEmail" placeholder="Enter your email" required><br>
+
+                        <label for="loginPassword">Password</label><br>
+                        <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your Password" required><br>
+
+                        <span class="rmfp">
+                            <span>
+                                <input type="checkbox" id="rememberMe" name="rememberMe">
+                                <p for="rememberMe">Remember me</p>
+                            </span>
+                            <p class="forgotPassword">Forgot password?</p>
+                        </span>
+                        <span class="myLoginBtn">
+                            <button class="loginBtn" type="submit">Login</button>
+                        </span>
+
+                        <div class="dontHaveAccount">
+                            <p class="accCreation">Don't have an account?</p>
+                            <a class="redirect" id="accCreate">Create account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="registration" id="regisContainer">
+            <div class="bar"></div>
+            <div class="register-form">
+                <!-- Account Form -->
+                <form id="account-form" action="/phpProcesses/register.php" method="post" style="display: <?php echo (!isset($_SESSION['step']) || $_SESSION['step'] == 'account') ? 'flex' : 'none'; ?>">
+                    <h1 class="ca1">Create Account</h1>
+                    <div class="name-fields">
+                        <div class="name-field">
+                            <label for="firstname">First Name</label>
+                            <input class="inputPadding" type="text" id="firstname" name="firstname" required>
+                        </div>
+                        <div class="name-field">
+                            <label for="lastname">Last Name</label>
+                            <input class="inputPadding" type="text" id="lastname" name="lastname" required>
+                        </div>
+                    </div>
+                    <div class="epp">
+                        <label for="email">Email</label>
+                        <input class="inputPadding" type="email" id="email" name="email" required>
+                    </div>
+                    <div class="epp password">
+                        <label for="password">Password</label>
+                        <input class="inputPadding" type="password" id="password" name="password"
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$"
+                            minlength="6" maxlength="12" required>
+                    </div>
+                    <div class="epp password">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input class="inputPadding" type="password" id="confirm-password" name="confirm-password"
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$"
+                            minlength="6" maxlength="12" required>
+                    </div>
+                    <div class="CBagreement">
+                        <input class="inputPadding myCheckbox" type="checkbox" id="agreement" name="agreement" required>
+                        <label for="agreement">I agree to the Terms and Conditions</label>
+                    </div>
+                    <button class="nextBtn" type="submit">Continue</button>
+                    <div class="haveAccount">
+                        <p>Already have an account?</p>
+                        <a class="redirect" id="accLogin">Login</a>
+                    </div>
+                </form>
+
+                <!-- OTP Form -->
+                <div id="otp" class="otpFormContainer" style="display: <?php echo ($_SESSION['step'] == 'otp') ? 'flex' : 'none'; ?>">
+                    <img src="assets/williams-black.png" alt="">
+                    <h2 class="otpSpacing">Enter OTP</h2>
+                    <p class="otpSpacing">A 6-digit code has been sent to your email</p>
+                    <form id="otpForm" action="/phpProcesses/verify_otp.php" method="post" autocomplete="off">
+                        <div class="otpForm otpSpacing">
+                            <?php for ($i = 0; $i < 6; $i++): ?>
+                                <input type="text" maxlength="1" class="otp-input" name="otp[]">
+                            <?php endfor; ?>
+                        </div>
+                        <a class="resend otpSpacing" href="">Resend Code</a>
+                        <button type="submit">Verify</button>
+                    </form>
+                </div>
+
+                <!-- Location Form -->
+                <form class="location-form" id="location-form" action="/phpProcesses/save_location.php" method="post" style="display: <?php echo ($_SESSION['step'] == 'location') ? 'flex' : 'none'; ?>">
+                    <h1 class="ca2">Create Account</h1>
+                    <div class="rpIn">
+                        <div class="rp">
+                            <label for="Region">Region</label>
+                            <input class="inputPadding" type="text" id="Region" name="Region" required>
+                        </div>
+                        <div class="rp">
+                            <label for="Province">Province</label>
+                            <input class="inputPadding" type="text" id="Province" name="Province" required>
+                        </div>
+                    </div>
+                    <div class="epp">
+                        <label for="city">City</label>
+                        <input class="inputPadding" type="text" id="city" name="city" required>
+                    </div>
+                    <div class="epp">
+                        <label for="zipcode">Zip Code</label>
+                        <input class="inputPadding" type="text" id="zipcode" name="zipcode" required>
+                    </div>
+                    <div class="CBagreement">
+                        <input class="inputPadding myCheckbox" type="checkbox" id="agreements" name="agreements" required>
+                        <label for="agreements">I agree to the Terms and Conditions</label>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="back-btn">Back</button>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+
+                <!-- Feedback Messages -->
+                <div id="message-container" style="display: none;">
+                    <div class="alert" id="alert-message"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="js/index.js"></script>
+    <script src="js/registration.js"></script>
+</body>
+
+</html>
+
+
+index.js
+/**
+ * Main application script
+ * Handles registration, login forms, and carousel functionality
+ */
+
+// Wait for DOM to be fully loaded before executing
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize authentication module
+    initializeAuthentication();
+    
+    // Initialize carousel module
+    initializeCarousel();
+});
+
+/**
+ * Authentication Module
+ * Handles user registration, login, and OTP verification
+ */
+function initializeAuthentication() {
+    // DOM Elements
+    const elements = {
+        overlay: document.getElementById('overlay'),
+        triggerImage: document.getElementById('myAvatar'),
+        signupLink: document.getElementById('signupLink'),
+        loginDisplay: document.getElementById('loginDisplay'),
+        regisContainer: document.getElementById('regisContainer'),
+        accLogin: document.getElementById('accLogin'),
+        accCreate: document.getElementById('accCreate'),
+        checkboxes: document.getElementsByClassName('myCheckbox'),
+        accountForm: document.getElementById('account-form'),
+        otpForm: document.getElementById('otpForm'),
+        locationForm: document.getElementById('location-form'),
+        otpInputs: document.querySelectorAll('.otp-input'),
+        resendLink: document.querySelector('.resend')
+    };
+    
+    // OTP Timer state
+    const otpState = {
+        timer: null,
+        cooldownTimer: null,
+        timeLeft: 300, // 5 minutes in seconds
+        resendCooldown: 0
+    };
+    
+    // Get current step from PHP session
+    const currentStep = '<?php echo isset($_SESSION["step"]) ? $_SESSION["step"] : "account"; ?>';
+    
+    // Initialize UI based on URL
+    initializeUI();
+    
+    // Set up event listeners
+    setupEventListeners();
+    
+    // Initialize form handlers
+    setupFormHandlers();
+    
+    // Initialize OTP functionality
+    setupOtpFunctionality();
+    
+    /**
+     * Initializes UI state based on URL parameters and session
+     */
+    function initializeUI() {
+        // Check if we need to show registration forms based on URL
+        if (!checkUrlForRegistration()) {
+            // Only hide initially if not directed to registration
+            elements.overlay.style.display = 'none';
+        }
+        
+        // Set up checkboxes synchronized behavior
+        for (let i = 0; i < elements.checkboxes.length; i++) {
+            elements.checkboxes[i].addEventListener('change', (event) => {
+                const isChecked = event.target.checked;
+                for (let j = 0; j < elements.checkboxes.length; j++) {
+                    elements.checkboxes[j].checked = isChecked;
+                }
+            });
+        }
+    }
+    
+    /**
+     * Checks URL for registration related parameters
+     * @returns {boolean} Whether registration should be shown
+     */
+    function checkUrlForRegistration() {
+        // Get URL hash if present
+        const urlHash = window.location.hash;
+        
+        // If URL contains specific registration-related hashes, show the overlay and correct form
+        if (urlHash === '#regisContainer' || urlHash === '#otp') {
+            showOverlay();
+            showRegistrationForm();
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Sets up event listeners for UI interactions
+     */
+    function setupEventListeners() {
+        // Handle overlay clicks and UI navigation
+        document.addEventListener('click', (event) => {
+            if (event.target === elements.overlay) {
+                hideOverlay();
+                elements.regisContainer.style.display = 'none';
+                elements.loginDisplay.style.display = 'none';
+            }
+            else if (event.target === elements.signupLink) {
+                event.preventDefault();
+                showOverlay();
+                elements.loginDisplay.style.display = 'none';
+                elements.regisContainer.style.display = 'flex';
+                showRegistrationForm();
+            }
+            else if (event.target === elements.triggerImage) {
+                event.preventDefault();
+                showOverlay();
+                elements.regisContainer.style.display = 'none';
+                elements.loginDisplay.style.display = 'flex';
+            }
+            else if (event.target === elements.accCreate) {
+                event.preventDefault();
+                showOverlay();
+                showRegistrationForm();
+            }
+            else if (event.target === elements.accLogin) {
+                event.preventDefault();
+                showOverlay();
+                elements.regisContainer.style.display = 'none';
+                elements.loginDisplay.style.display = 'flex';
+            }
+        });
+    }
+    
+    /**
+     * Shows the overlay
+     */
+    function showOverlay() {
+        elements.overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    /**
+     * Hides the overlay
+     */
+    function hideOverlay() {
+        elements.overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    
+    /**
+     * Shows appropriate registration form based on current step
+     */
+    function showRegistrationForm() {
+        elements.loginDisplay.style.display = 'none';
+        elements.regisContainer.style.display = 'flex';
+        
+        // Show the appropriate form container based on session step
+        if (currentStep === 'otp') {
+            document.getElementById('account-form').style.display = 'none';
+            document.getElementById('otp').style.display = 'flex';
+            document.getElementById('location-form').style.display = 'none';
+            
+            // Start OTP timer when showing OTP form
+            startOtpTimer();
+        } else if (currentStep === 'location') {
+            document.getElementById('account-form').style.display = 'none';
+            document.getElementById('otp').style.display = 'none';
+            document.getElementById('location-form').style.display = 'flex';
+        } else {
+            // Default to account form
+            document.getElementById('account-form').style.display = 'flex';
+            document.getElementById('otp').style.display = 'none';
+            document.getElementById('location-form').style.display = 'none';
+        }
+    }
+    
+    /**
+     * Sets up form submission handlers with AJAX
+     */
+    function setupFormHandlers() {
+        // Account form handler
+        if (elements.accountForm) {
+            elements.accountForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                
+                fetch('/phpProcesses/register.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show OTP form
+                        document.getElementById('account-form').style.display = 'none';
+                        document.getElementById('otp').style.display = 'flex';
+                        startOtpTimer();
+                    } else {
+                        // Show error message
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        }
+        
+        // OTP form handler
+        if (elements.otpForm) {
+            elements.otpForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                
+                fetch('/phpProcesses/verify_otp.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show location form
+                        document.getElementById('otp').style.display = 'none';
+                        document.getElementById('location-form').style.display = 'flex';
+                    } else {
+                        // Show error message
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        }
+        
+        // Location form handler
+        if (elements.locationForm) {
+            elements.locationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                
+                fetch('/phpProcesses/save_location.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Registration complete - show success message and login form
+                        alert(data.message);
+                        elements.regisContainer.style.display = 'none';
+                        elements.loginDisplay.style.display = 'flex';
+                    } else {
+                        // Show error message
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        }
+    }
+    
+    /**
+     * Sets up OTP functionality including timers and input field navigation
+     */
+    function setupOtpFunctionality() {
+        // Initialize OTP timer if OTP form is displayed
+        if (document.getElementById('otp') && document.getElementById('otp').style.display === 'flex') {
+            startOtpTimer();
+        }
+        
+        // Handle the resend OTP link
+        if (elements.resendLink) {
+            elements.resendLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Don't proceed if cooldown is active
+                if (otpState.resendCooldown > 0) {
+                    return;
+                }
+                
+                // Show loading state
+                this.textContent = 'Sending...';
+                this.style.pointerEvents = 'none';
+                
+                fetch('/phpProcesses/resend_otp.php', {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle form reset if max attempts reached
+                    if (data.reset) {
+                        alert(data.message);
+                        document.getElementById('otp').style.display = 'none';
+                        document.getElementById('account-form').style.display = 'flex';
+                        return;
+                    }
+                    
+                    // Handle cooldown message
+                    if (data.cooldown) {
+                        alert(data.message);
+                        otpState.resendCooldown = data.timeLeft;
+                        updateResendButton();
+                        return;
+                    }
+                    
+                    // If successful resend
+                    if (data.success) {
+                        // Reset the OTP input fields
+                        const otpInputs = document.querySelectorAll('.otp-input');
+                        otpInputs.forEach(input => {
+                            input.value = '';
+                        });
+                        
+                        // Focus on the first input field
+                        if (otpInputs.length > 0) {
+                            otpInputs[0].focus();
+                        }
+                        
+                        // Restart the OTP timer
+                        startOtpTimer();
+                        
+                        // Start cooldown timer
+                        startResendCooldown();
+                        
+                        // Show success message with remaining attempts
+                        alert(`${data.message} You have ${data.remaining} resend attempts remaining.`);
+                    } else {
+                        // Show error message
+                        alert(data.message);
+                        this.textContent = 'Resend Code';
+                        this.style.pointerEvents = '';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    this.textContent = 'Resend Code';
+                    this.style.pointerEvents = '';
+                    alert('Failed to resend OTP. Please try again.');
+                });
+            });
+        }
+        
+        // Set up OTP input field navigation
+        if (elements.otpInputs.length > 0) {
+            elements.otpInputs.forEach((input, index) => {
+                input.addEventListener('input', function() {
+                    if (this.value.length === this.maxLength) {
+                        // Move to next input
+                        if (index < elements.otpInputs.length - 1) {
+                            elements.otpInputs[index + 1].focus();
+                        }
+                    }
+                });
+                
+                input.addEventListener('keydown', function(e) {
+                    // On backspace, move to previous input
+                    if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                        elements.otpInputs[index - 1].focus();
+                    }
+                });
+            });
+        }
+    }
+    
+    /**
+     * Starts the OTP expiry timer
+     */
+    function startOtpTimer() {
+        // Clear any existing timer
+        if (otpState.timer) {
+            clearInterval(otpState.timer);
+        }
+        
+        // Reset time to 5 minutes
+        otpState.timeLeft = 300;
+        
+        // Setup timer display
+        setupOtpTimerDisplay();
+        
+        // Start countdown
+        otpState.timer = setInterval(function() {
+            otpState.timeLeft--;
+            
+            // Update timer display
+            const timerElement = document.querySelector('.otp-timer');
+            if (timerElement) {
+                timerElement.textContent = `Code expires in: ${formatTime(otpState.timeLeft)}`;
+                
+                // Change color when less than 1 minute left
+                if (otpState.timeLeft < 60) {
+                    timerElement.style.color = '#d9534f';
+                } else {
+                    timerElement.style.color = '#555';
+                }
+            }
+            
+            // When timer expires
+            if (otpState.timeLeft <= 0) {
+                clearInterval(otpState.timer);
+                
+                // Show expired message
+                const timerElement = document.querySelector('.otp-timer');
+                if (timerElement) {
+                    timerElement.textContent = 'OTP has expired. Please request a new one.';
+                    timerElement.style.color = '#d9534f';
+                }
+            }
+        }, 1000);
+    }
+    
+    /**
+     * Creates or updates the OTP timer display element
+     */
+    function setupOtpTimerDisplay() {
+        // Check if timer element already exists
+        let timerElement = document.querySelector('.otp-timer');
+        
+        if (!timerElement) {
+            // Create timer element
+            timerElement = document.createElement('p');
+            timerElement.className = 'otp-timer otpSpacing';
+            timerElement.style.textAlign = 'center';
+            timerElement.style.color = '#555';
+            
+            // Insert after the "A 6-digit code has been sent" paragraph
+            const otpContainer = document.getElementById('otp');
+            const afterElement = otpContainer.querySelector('p.otpSpacing');
+            otpContainer.insertBefore(timerElement, afterElement.nextSibling);
+        }
+        
+        // Update timer text
+        timerElement.textContent = `Code expires in: ${formatTime(otpState.timeLeft)}`;
+    }
+    
+    /**
+     * Starts the cooldown timer for OTP resend
+     */
+    function startResendCooldown() {
+        // Clear any existing cooldown timer
+        if (otpState.cooldownTimer) {
+            clearInterval(otpState.cooldownTimer);
+        }
+        
+        // Set cooldown to 30 seconds
+        otpState.resendCooldown = 30;
+        
+        // Update button state
+        updateResendButton();
+        
+        // Start countdown
+        otpState.cooldownTimer = setInterval(function() {
+            otpState.resendCooldown--;
+            
+            // Update button text
+            updateResendButton();
+            
+            // When cooldown ends
+            if (otpState.resendCooldown <= 0) {
+                clearInterval(otpState.cooldownTimer);
+            }
+        }, 1000);
+    }
+    
+    /**
+     * Updates the resend button state based on cooldown
+     */
+    function updateResendButton() {
+        const resendLink = document.querySelector('.resend');
+        if (resendLink) {
+            if (otpState.resendCooldown > 0) {
+                resendLink.textContent = `Resend Code (${otpState.resendCooldown}s)`;
+                resendLink.style.pointerEvents = 'none';
+                resendLink.style.color = '#999';
+            } else {
+                resendLink.textContent = 'Resend Code';
+                resendLink.style.pointerEvents = '';
+                resendLink.style.color = '';
+            }
+        }
+    }
+    
+    /**
+     * Formats seconds as MM:SS
+     * @param {number} seconds - Time in seconds
+     * @returns {string} Formatted time
+     */
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+}
+
+/**
+ * Carousel Module
+ * Handles image carousel functionality
+ */
+function initializeCarousel() {
+    // DOM Elements
+    const elements = {
+        carouselGrid: document.querySelector('.carousel-grid'),
+        prevButton: document.querySelector('.carousel-button.prev'),
+        nextButton: document.querySelector('.carousel-button.next')
+    };
+    
+    // Carousel state
+    const carouselState = {
+        currentPosition: 0,
+        totalItems: 0,
+        adjustedItemWidth: 0
+    };
+    
+    // Initialize carousel and set up event listeners
+    setup();
+    
+    /**
+     * Sets up carousel and event listeners
+     */
+    function setup() {
+        // Initialize carousel dimensions
+        calculateDimensions();
+        
+        // Set up event listeners
+        elements.prevButton.addEventListener('click', () => moveCarousel('prev'));
+        elements.nextButton.addEventListener('click', () => moveCarousel('next'));
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            calculateDimensions();
+        });
+    }
+    
+    /**
+     * Calculates carousel dimensions and item widths
+     */
+    function calculateDimensions() {
+        const item = document.querySelector('.Item');
+        if (!item) return;
+        
+        const itemWidth = item.offsetWidth + parseFloat(window.getComputedStyle(item).marginRight);
+        
+        const gapPercentage = 1;
+        const containerWidth = elements.carouselGrid.offsetWidth;
+        const gapInPixels = Math.floor((gapPercentage / 100) * containerWidth);
+        
+        carouselState.totalItems = document.querySelectorAll('.Item').length;
+        carouselState.adjustedItemWidth = itemWidth + gapInPixels;
+        
+        carouselState.currentPosition = 0;
+        elements.carouselGrid.style.transform = `translateX(${carouselState.currentPosition}px)`;
+    }
+    
+    /**
+     * Moves the carousel in the specified direction
+     * @param {string} direction - Direction to move ('prev' or 'next')
+     */
+    function moveCarousel(direction) {
+        const maxPosition = -(carouselState.adjustedItemWidth * (carouselState.totalItems - 3));
+        
+        if (direction === 'next') {
+            carouselState.currentPosition -= carouselState.adjustedItemWidth;
+            
+            if (carouselState.currentPosition < maxPosition) {
+                carouselState.currentPosition = 0;
+            }
+        } else if (direction === 'prev') {
+            carouselState.currentPosition += carouselState.adjustedItemWidth;
+            
+            if (carouselState.currentPosition > 0) {
+                carouselState.currentPosition = maxPosition;
+            }
+        }
+        
+        elements.carouselGrid.style.transform = `translateX(${carouselState.currentPosition}px)`;
+    }
+}
+
+
+
+
+login.php
+<?php
+session_start();
+include 'connection.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['loginEmail'];
+    $password = $_POST['loginPassword'];
+
+    try {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            $_SESSION['error'] = "Email not found.";
+            header("Location: ../index.php");
+            exit();
+        }
+
+        if (!password_verify($password, $user['password'])) {
+            $_SESSION['error'] = "Incorrect password.";
+            header("Location: ../index.php");
+            exit();
+        }
+
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_email'] = $user['email'];
+        header("Location: ../user.php");
+        exit();
+    } catch (PDOException $e) {
+        $_SESSION['error'] = "Database error: " . $e->getMessage();
+        header("Location: ../index.php");
+        exit();
+    }
+}
+
+
+
+add functions the log in form what ever is in theres all its buttom inputs and everything that suits
+
+
+my login css
+:root
+,* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    inset: none;
+}
+
+/* Login */
+
+.loginDisplay {
+    border-radius: 1.4rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(254, 254, 254);
+    backdrop-filter: blur(200px);
+    z-index: 99;
+}
+.loginContainer {
+    min-width: 486px;
+    border-radius: 1.4rem;
+    min-height: 602px;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(200px);
+    box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.70);
+}
+.rmfp {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    font-size: .95rem;
+}
+.rmfp span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.loginForm span input {
+    width: 1rem;
+    height: 1rem;
+}
+#rememberMe input[type="checkbox"]:checked {
+    background-color: #8D0101;
+}
+.headerContainer {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 2rem;
+}
+.forgotPassword {
+    color: #8D0101;
+    font-weight: 500;
+}
+#loginEmail,
+#loginPassword {
+    width: 20rem;
+    height: 2.4rem;
+    border: 0;
+    border-radius: .75rem;
+    padding: .5rem;
+    margin-bottom: 1rem;
+}
+.loginBtn {
+    width: 214px;
+    height: 34px;
+    background-color: #8D0101;
+    text-align: center;
+    border: 0;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+}
+.myLoginBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.dontHaveAccount {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.redirect {
+    word-spacing: 1re;
+    text-decoration: none;
+    color: #8D0101;
+    margin-left: .5rem;
+    font-weight: 500;
+    cursor: pointer;
+}

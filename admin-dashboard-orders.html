@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./CSS/index.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard.css">
+        <link rel="stylesheet" href="./CSS/dashboard-product.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard-orders.css">
+        <script src="https://kit.fontawesome.com/e588cb9d47.js"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss"></script>
+        <title>William's Dashboard</title>
+    </head>
+    <body>
+        <div class="dash-sidebar">
+            <div class="dash-logo">
+                <img src="assets/williams.png" alt="William's Logo">
+            </div>
+            <nav>
+                <a href="admin-dashboard.html"><i class="fa-solid fa-gauge"></i>
+                    Dashboard</a>
+                <a href="admin-dashboard-product.html" ><i class="fa-solid fa-box"></i>
+                    Products</a>
+                <a href="ad" class="active"><i class="fa-solid fa-cart-shopping"></i> Orders</a>
+                <a href="admin-dashboard-customer.html"><i class="fa-solid fa-users"></i> Customers</a>
+                <a href="#"><i class="fa-solid fa-chart-line"></i> Sales
+                    Reports</a>
+                <a href="#"><i class="fa-solid fa-money-bill-transfer"></i>
+                    Transactions</a>
+                <a href="#"><i class="fa-solid fa-calendar-check"></i>
+                    Reservations</a>
+                <a href="#"><i class="fa-solid fa-calendar-days"></i>
+                    Appointments</a>
+                <a href="#"><i class="fa-solid fa-truck"></i> Shipping &
+                    Delivery</a>
+            </nav>
+        </div>
+    </div>
+    <div class="dash-main">
+        <div class="dash-topbar">
+            <div class="dash-search-box">
+                <div class="search-container">
+                    <input type="text" placeholder="Search William's...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+            </div>
+            <div class="dash-top-icons">
+                <i class="fa-solid fa-bell" onclick="toggleNotificationModal()"></i>
+                <i class="fa-solid fa-envelope" onclick="toggleMessageModal()"></i>
+            </div>
+            <div class="dash-profile">
+                <img src="assets/logo.png" alt="profile">
+                <div class="profile-info">
+                    <div class="profile-name">William</div>
+                    <div class="profile-role">Administrator</div>
+                </div>
+                <div class="admin-chevron-down" onclick="toggleLogoutMenu()">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div id="logout-menu" class="logout-menu" style="display: none;">
+                    <a href="logout.html">Logout</a>
+                </div>
+
+        <!-- Notification Modal -->
+        <div id="notificationModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="toggleNotificationModal()">&times;</span>
+                <h3>Notifications</h3>
+                <ul>
+                    <li>No new notifications</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Message Modal -->
+        <div id="messageModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="toggleMessageModal()">&times;</span>
+                <h3>Messages</h3>
+                <ul>
+                    <li>No new messages</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+        <div class="actions-bar-orders">
+          <button onclick="downloadTable()"><i class="fa-solid fa-download"></i></button>
+          <div class="filter-dropdown-orders">
+            <button onclick="toggleFilterMenu()"><i class="fa-solid fa-filter"></i>Filter</button>
+            <div class="dropdown-content-orders">
+              <div onclick="filterStatus('Processing')">Processing</div>
+              <div onclick="filterStatus('Cancelled')">Cancelled</div>
+              <div onclick="filterStatus('Delivered')">Delivered</div>
+            </div>
+          </div>
+          <div class="filter-dropdown-orders">
+            <button><i class="fa-regular fa-calendar-days"></i> Weekly <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="dropdown-content-orders">
+              <div onclick="setDateFilter('weekly')">Weekly</div>
+              <div onclick="setDateFilter('monthly')">Monthly</div>
+            </div>
+          </div>
+        </div>
+      
+          <table id="ordersTable">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Order Date</th>
+                <th>Payment Mode</th>
+                <th>Order Status</th>
+                <th>Total Amount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="order-id-orders">1001</td>
+                <td>John Doe</td>
+                <td>2025-03-01</td>
+                <td>Credit Card</td>
+                <td class="status-shipped">Shipped</td>
+                <td>₱5,200</td>
+                <td><span class="view-link-orders">View</span></td>
+              </tr>
+              <tr>
+                <td class="order-id-orders">1002</td>
+                <td>Jane Smith</td>
+                <td>2025-03-02</td>
+                <td>Cash on Delivery</td>
+                <td class="status-processing">Processing</td>
+                <td>₱3,450</td>
+                <td><span class="view-link-orders">View</span></td>
+              </tr>
+              <tr>
+                <td class="order-id-orders">1003</td>
+                <td>Mark Reyes</td>
+                <td>2025-03-03</td>
+                <td>Bank Transfer</td>
+                <td class="status-cancelled">Cancelled</td>
+                <td>₱2,800</td>
+                <td><span class="view-link-orders">View</span></td>
+              </tr>
+              <tr>
+                <td class="order-id-orders">1004</td>
+                <td>Sarah Lim</td>
+                <td>2025-03-03</td>
+                <td>Credit Card</td>
+                <td class="status-delivered">Delivered</td>
+                <td>₱7,900</td>
+                <td><span class="view-link-orders">View</span></td>
+              </tr>
+              <tr>
+                <td class="order-id-orders">1005</td>
+                <td>Carlo Dela Cruz</td>
+                <td>2025-03-04</td>
+                <td>Gcah</td>
+                <td class="status-cancelled">Cancelled</td>
+                <td>Cash</td>
+                <td><span class="view-link-orders">View</span></td>
+              </tr>
+              <tr>
+                <td class="order-id-orders">1006</td>
+                <td>Angela Torres</td>
+                <td>2025-03-05</td>
+                <td>Paypal</td>
+                <td class="status-processing">Processing</td>
+                <td>₱6,750</td>
+                <td><span class="view-link-orders">View</span></td>
+              </tr>
+              <tr>
+                <td class="order-id-orders">1007</td>
+                <td>Michael Tan</td>
+                <td>2025-03-06</td>
+                <td>Cash on Delivery</td>
+                <td class="status-processing">Processing</td>
+                <td>₱3,990</td>
+                <td><span class="view-link-orders">View</span></td>
+              </tr>
+              <tr>
+                <td class="order-id-orders">1008</td>
+                <td>Michael Tan</td>
+                <td>2025-03-06</td>
+                <td>Cash on Delivery</td>
+                <td class="status-processing">Processing</td>
+                <td>₱3,990</td>
+                <td><span class="view-link-orders">View</span></td>
+              </tr>
+              <tr>
+                <td class="order-id-orders">1009</td>
+                <td>Michael Tan</td>
+                <td>2025-03-06</td>
+                <td>Cash on Delivery</td>
+                <td class="status-processing">Processing</td>
+                <td>₱3,990</td>
+                <td><span class="view-link-orders">View</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+        <script src="./JS/admin-logout.js"></script>
+        <script src="./JS/togglefilter-menu.js"></script>
+        <script src="./JS/notif&message.js"></script>
+    </body>
+    </html>

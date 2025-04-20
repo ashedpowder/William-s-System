@@ -1,0 +1,8 @@
+how to implement this section to dynamicaly show what category when click
+ignore the services and about us for now
+the fetching and nav bar is already set up just wanna combine them to function properly. only focus on the music and sport filtering and displaying products . I refrain you going over board than that
+
+Please in the function.php you may remove the insertion of sample data and just fully relly on database schema
+
+and avoid any PDO  error trigger magnet lines
+take note I already have the database schemema and some sample data inserter on my mysql so you do not need to add any sampe data for products and categories

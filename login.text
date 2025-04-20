@@ -1,0 +1,177 @@
+index.php
+
+<?php
+session_start();
+
+include 'phpProcesses/connection.php';
+include 'phpProcesses/carousel.php';
+include 'navigation.php';
+
+if (!isset($_SESSION['step'])) {
+    $_SESSION['step'] = 'account';
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="css\index.css">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="nametag">
+            <img class="mt-2 mb-2" src="assets/williams.png" alt="William Records Tag">
+        </div>
+        <section class="leftheader">
+            <div class="SContainer">
+                <input type="search" placeholder="Search William's....">
+                <div>
+                    <img src="assets/search-icon.png" alt="">
+                </div>
+            </div>
+            <?php if(!isset($_SESSION['user_id'])): ?>
+                <a href="#" id="signupLink" class="signup">Sign up</a>
+                <img id="myAvatar" src="assets/Generic-avatar.png" alt="User Icon" style="cursor: pointer;">
+            <?php else: ?>
+                <img class="logFunction" src="assets/notif-bell.png" alt="notifications">
+                <img class="logFunction" src="assets/shopping-cart.png" alt="shopping cart">
+                <span class="username font-bold text-white text-2xl -mr-5"><?php echo htmlspecialchars($_SESSION['user_initials']); ?></span>
+                <?php include 'phpComponents/userProfile.php';?>
+                <?php endif; ?>
+        </section>
+    </header>
+    <section class="navigation">
+        <div class="category-item" data-category="music">
+            <h3>Music</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <div class="category-item" data-category="sports">
+            <h3>Sports</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <h3>Services</h3>
+        <h3 class="ab">About us</h3>
+    </section>
+    <main id="dynamicContent">
+        <?php include 'phpComponents/landing.php';?>
+    </main>
+
+    <div class="overlay" id="overlay">
+        <?php include 'phpComponents/signInUp.php';?>
+    </div>
+S
+</body>
+
+</html>
+
+
+category.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle category navigation
+    const categoryItems = document.querySelectorAll('.category-item');
+    const dynamicContent = document.getElementById('dynamicContent');
+    
+    categoryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // Add active class to selected category
+            categoryItems.forEach(cat => cat.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Load category content via AJAX
+            fetch(`navigation.php?load_category=${category}`)
+                .then(response => response.text())
+                .then(html => {
+                    if (dynamicContent) {
+                        dynamicContent.innerHTML = html;
+                    } else {
+                        // If dynamicContent doesn't exist, try to place content in main container
+                        const mainContainer = document.querySelector('main.container');
+                        if (mainContainer) {
+                            mainContainer.innerHTML = html;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading category:', error);
+                });
+        });
+    });
+    
+    // Handle subcategory filters
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.filter-checkbox') || e.target.matches('.brand-checkbox')) {
+            applyFilters();
+        }
+    });
+    
+    // Price filter application
+    const applyPriceBtn = document.querySelector('.apply-price-filter');
+    if (applyPriceBtn) {
+        applyPriceBtn.addEventListener('click', applyFilters);
+    }
+    
+    function applyFilters() {
+        // Collect all selected filters
+        const checkedBrands = Array.from(document.querySelectorAll('.brand-checkbox:checked, input[id^="brand_"]:checked'))
+            .map(cb => cb.value || cb.id.replace('brand_', ''));
+            
+        const checkedAttributes = [];
+        document.querySelectorAll('.attribute-group, [id^="attr_"]').forEach(group => {
+            const attrId = group.getAttribute('data-attribute-id') || 
+                          (group.id && group.id.startsWith('attr_') ? group.id.split('_')[1] : null);
+            
+            if (attrId) {
+                const checkedValues = Array.from(group.querySelectorAll('input:checked'))
+                    .map(cb => cb.value);
+                    
+                if (checkedValues.length > 0) {
+                    checkedAttributes.push({
+                        id: attrId,
+                        values: checkedValues
+                    });
+                }
+            }
+        });
+        
+        const minPrice = document.querySelector('.min-price, [placeholder="MIN"]')?.value;
+        const maxPrice = document.querySelector('.max-price, [placeholder="MAX"]')?.value;
+        
+        // Build filter query
+        let filterQuery = '';
+        
+        if (checkedBrands.length > 0) {
+            filterQuery += `&brands=${checkedBrands.join(',')}`;
+        }
+        
+        if (checkedAttributes.length > 0) {
+            filterQuery += `&attributes=${JSON.stringify(checkedAttributes)}`;
+        }
+        
+        if (minPrice) {
+            filterQuery += `&min_price=${minPrice}`;
+        }
+        
+        if (maxPrice) {
+            filterQuery += `&max_price=${maxPrice}`;
+        }
+        
+        // Get current category from URL or from active navigation
+        const currentCategory = new URLSearchParams(window.location.search).get('slug') || 
+                               document.querySelector('.category-item.active')?.getAttribute('data-category');
+        
+        // Apply filters
+        if (currentCategory) {
+            window.location.href = `category.php?slug=${currentCategory}${filterQuery}`;
+        }
+    }
+});

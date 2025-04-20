@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./CSS/index.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard.css">
+        <link rel="stylesheet" href="./CSS/dashboard-product.css">
+        <link rel="stylesheet" href="./CSS/admin-dashboard-orders.css">
+        <script src="https://kit.fontawesome.com/e588cb9d47.js"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss"></script>
+        <title>William's Dashboard</title>
+    </head>
+    <body>
+        <div class="dash-sidebar">
+            <div class="dash-logo">
+                <img src="assets/williams.png" alt="William's Logo">
+            </div>
+            <nav>
+                <a href="admin-dashboard.html"><i class="fa-solid fa-gauge"></i>
+                    Dashboard</a>
+                <a href="#" class="active"><i class="fa-solid fa-box"></i>
+                    Products</a>
+                <a href="admin-dashboard-orders.html"><i class="fa-solid fa-cart-shopping"></i> Orders</a>
+                <a href="admin-dashboard-customer.html"><i class="fa-solid fa-users"></i> Customers</a>
+                <a href="admin-dashboard-salesreport.html"><i class="fa-solid fa-chart-line"></i> Sales
+                    Reports</a>
+                <a href="admin-dashboard-transaction.html"><i class="fa-solid fa-money-bill-transfer"></i>
+                    Transactions</a>
+                <a href="#"><i class="fa-solid fa-calendar-check"></i>
+                    Reservations</a>
+                <a href="admin-dashboard-appointment.html"><i class="fa-solid fa-calendar-days"></i>
+                    Appointments</a>
+                <a href="#"><i class="fa-solid fa-truck"></i> Shipping &
+                    Delivery</a>
+            </nav>
+        </div>
+    </div>
+    <div class="dash-main">
+        <div class="dash-topbar">
+            <div class="dash-search-box">
+                <div class="search-container">
+                    <input type="text" placeholder="Search William's...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+            </div>
+            <div class="dash-top-icons">
+                <i class="fa-solid fa-bell" onclick="toggleNotificationModal()"></i>
+                <i class="fa-solid fa-envelope" onclick="toggleMessageModal()"></i>
+            </div>
+            <div class="dash-profile">
+                <img src="assets/logo.png" alt="profile">
+                <div class="profile-info">
+                    <div class="profile-name">William</div>
+                    <div class="profile-role">Administrator</div>
+                </div>
+                <div class="admin-chevron-down" onclick="toggleLogoutMenu()">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div id="logout-menu" class="logout-menu" style="display: none;">
+                    <a href="logout.html">Logout</a>
+                </div>
+
+        <!-- Notification Modal -->
+        <div id="notificationModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="toggleNotificationModal()">&times;</span>
+                <h3>Notifications</h3>
+                <ul>
+                    <li>No new notifications</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Message Modal -->
+        <div id="messageModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="toggleMessageModal()">&times;</span>
+                <h3>Messages</h3>
+                <ul>
+                    <li>No new messages</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="product-dashboard-container">
+            <div class="product-dashboard-top-bar">
+                <input type="text" id="searchInput"
+                    placeholder="Search a product" />
+                <button onclick="toggleModal()">+ Add Product</button>
+            </div>
+
+                <table id="productTable" class="product-dashboard-table">
+                    <thead>
+                        <tr>
+                            <th><input type="radio" name="selectAll" /></th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="radio" name="selectProduct" /></td>
+                            <td><img src="https://i.imgur.com/kNB1BOM.png"
+                                    alt="Martin D-28"
+                                    class="product-dashboard-img" /> Martin
+                                D-28</td>
+                            <td><span>Acoustic Guitar</span></td>
+                            <td>Php 150,000</td>
+                            <td>5</td>
+                            <td class="product-dashboard-status"><span
+                                    class="product-dashboard-low-stock"></span>Low
+                                Stock</td>
+                            <td><a href="#" class="product-dashboard-edit-btn"
+                                    onclick="openEditModal('Martin D-28', 'Acoustic Guitar', 'Php 150,000', 5, 'Low Stock')">Edit</a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="selectProduct" /></td>
+                            <td><img src="https://i.imgur.com/jZ0my9C.png"
+                                    alt="Spalding Ball"
+                                    class="product-dashboard-img" /> Spalding
+                                Eco-Composite Basketball</td>
+                            <td><span>Basketball</span></td>
+                            <td>Php 2,800</td>
+                            <td>15</td>
+                            <td class="product-dashboard-status"><span
+                                    class="product-dashboard-active"></span>Active</td>
+                            <td><a href="#" class="product-dashboard-edit-btn"
+                                    onclick="openEditModal('Spalding Eco-Composite Basketball', 'Basketball', 'Php 2,800', 15, 'Active')">Edit</a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="selectProduct" /></td>
+                            <td><img src="https://i.imgur.com/jZ0my9C.png"
+                                    alt="Spalding TF-1000"
+                                    class="product-dashboard-img" /> Spalding
+                                TF-1000 Classic</td>
+                            <td><span>Basketball</span></td>
+                            <td>Php 4,200</td>
+                            <td>2</td>
+                            <td class="product-dashboard-status"><span
+                                    class="product-dashboard-low-stock"></span>Low
+                                Stock</td>
+                            <td><a href="#" class="product-dashboard-edit-btn"
+                                    onclick="openEditModal('Spalding TF-1000 Classic', 'Basketball', 'Php 4,200', 2, 'Low Stock')">Edit</a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="selectProduct" /></td>
+                            <td><img src="https://i.imgur.com/kNB1BOM.png"
+                                    alt="Cort AD810"
+                                    class="product-dashboard-img" /> Cort
+                                AD810</td>
+                            <td><span>Acoustic Guitar</span></td>
+                            <td>Php 7,000</td>
+                            <td>23</td>
+                            <td class="product-dashboard-status"><span
+                                    class="product-dashboard-active"></span>Active</td>
+                            <td><a href="#" class="product-dashboard-edit-btn"
+                                    onclick="openEditModal('Cort AD810', 'Acoustic Guitar', 'Php 7,000', 23, 'Active')">Edit</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+           
+        <!-- Edit Product Modal -->
+        <div class="product-dashboard-modal-edit" id="editProductModal">
+            <div class="product-dashboard-modal-content-edit">
+            <h2>Edit Product</h2>
+            <div class="product-dashboard-images">
+                <div class="product-dashboard-image-box">+</div>
+                <div class="product-dashboard-image-box">+</div>
+                <div class="product-dashboard-image-box">+</div>
+                <div class="product-dashboard-image-box">+</div>
+            </div>
+            <input class="product-dashboard-input" type="text"
+                placeholder="Name of product" value="Acoustic Guitar">
+            <textarea class="product-dashboard-textarea" rows="4"
+                placeholder="Describe your product...">Great for beginners and pros alike!</textarea>
+            <div class="product-dashboard-row">
+                <div>
+                <label>Price</label><br>
+                <input class="product-dashboard-input"
+                    style="width: 120px; text-align: center;" type="text"
+                    value="Php 1,000.00">
+                </div>
+                <div>
+                <label>Stock</label><br>
+                <input class="product-dashboard-input"
+                    style="width: 70px; text-align: center;" type="number" value="2">
+                </div>
+                <div>
+                <label>Status</label><br>
+                <input type="checkbox" class="product-dashboard-toggle"
+                    checked>
+                <span>Low Stock</span>
+                </div>
+            </div>
+            <div class="product-dashboard-row"
+                style="justify-content: flex-end;">
+                <button class="product-dashboard-create-btn"
+                style="background: #999; margin-right: 1rem;" onclick="deleteProduct()">Delete</button>
+                <button class="product-dashboard-create-btn" onclick="saveChanges()">Save
+                Changes</button>
+            </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="product-dashboard-modal" id="addProductModal">
+            <div class="product-dashboard-modal-content">
+                <h2>Add Product</h2>
+                <div class="product-dashboard-images">
+                    <div class="product-dashboard-image-box">
+                        <input type="file" accept="image/*" multiple
+                            onchange="previewImages(this)"
+                            style="display: none;">
+                        <div class="product-dashboard-preview-container"></div>
+                        <button onclick="triggerFileInput(this)">+</button>
+                    </div>
+                    <div class="product-dashboard-image-box">
+                        <input type="file" accept="image/*" multiple
+                            onchange="previewImages(this)"
+                            style="display: none;">
+                        <div class="product-dashboard-preview-container"></div>
+                        <button onclick="triggerFileInput(this)">+</button>
+                    </div>
+                    <div class="product-dashboard-image-box">
+                        <input type="file" accept="image/*" multiple
+                            onchange="previewImages(this)"
+                            style="display: none;">
+                        <div class="product-dashboard-preview-container"></div>
+                        <button onclick="triggerFileInput(this)">+</button>
+                    </div>
+                    <div class="product-dashboard-image-box">
+                        <input type="file" accept="image/*" multiple
+                            onchange="previewImages(this)"
+                            style="display: none;">
+                        <div class="product-dashboard-preview-container"></div>
+                        <button onclick="triggerFileInput(this)">+</button>
+                    </div>
+                </div>
+
+                <label>Product Name</label><br>
+                <input class="product-dashboard-input" type="text"
+                    placeholder="Name of product">
+                <label>Description<span>(Optional)</span></label><br>
+                <textarea class="product-dashboard-textarea" rows="4"
+                    placeholder="Describe your product..."></textarea>
+                <div class="product-dashboard-row">
+                    <div>
+                        <label>Price</label><br>
+                        <input class="product-dashboard-input"
+                            style="width: 120px;" type="text"
+                            value="Php 1,000.00">
+                    </div>
+                    <div>
+                        <label>Stock</label><br>
+                        <input class="product-dashboard-input"
+                            style="width: 80px; text-align: center;" type="number" value="2">
+                    </div>
+                    <div>
+                        <label>Status</label><br>
+                        <input type="checkbox" class="product-dashboard-toggle"
+                            checked>
+                        <span>Low Stock</span>
+                    </div>
+                </div>
+                <button class="product-dashboard-create-btn">Create
+                    Product</button>
+            </div>
+        </div>
+    </div>
+        <script src="./JS/edit-product-modal.js"></script>
+        <script src="./JS/admin-logout.js"></script>
+        <script src="./JS/input-image.js"></script>
+        <script src="./JS/notif&message.js"></script>
+    </body>
+</html>

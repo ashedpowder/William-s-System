@@ -1,0 +1,293 @@
+<?php
+session_start();
+
+include 'phpProcesses/connection.php';
+include 'phpProcesses/carousel.php';
+
+if (!isset($_SESSION['step'])) {
+    $_SESSION['step'] = 'account';
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="css\index.css">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="nametag">
+            <img class="mt-2 mb-2" src="assets/williams.png" alt="William Records Tag">
+        </div>
+        <section class="leftheader">
+            <div class="SContainer">
+                <input type="search" placeholder="Search William's....">
+                <div>
+                    <img src="assets/search-icon.png" alt="">
+                </div>
+            </div>
+            <?php if(!isset($_SESSION['user_id'])): ?>
+                <a href="#" id="signupLink" class="signup">Sign up</a>
+                <img id="myAvatar" src="assets/Generic-avatar.png" alt="User Icon" style="cursor: pointer;">
+            <?php else: ?>
+                <img class="logFunction" src="assets/notif-bell.png" alt="notifications">
+                <img class="logFunction" src="assets/shopping-cart.png" alt="shopping cart">
+                <span class="username font-bold text-white text-2xl -mr-5"><?php echo htmlspecialchars($_SESSION['user_initials']); ?></span>
+                <?php include 'phpComponents/userProfile.php';?>
+                <?php endif; ?>
+        </section>
+    </header>
+    <section class="navigation">
+    <div class="category-item" data-category="music">
+        <h3>Music</h3>
+        <span class="arrow">&#8249;</span>
+    </div>
+    <div class="category-item" data-category="sports">
+        <h3>Sports</h3>
+        <span class="arrow">&#8249;</span>
+    </div>
+    <h3>Services</h3>
+    <h3 class="ab">About us</h3>
+    </section>
+    <main id="dynamicContent">
+    <?php include 'phpComponents/landing.php';?>
+    </main>
+
+    <div class="overlay" id="overlay">
+    <?php include 'phpComponents/signInUp.php';?>
+    </div>
+    <script src="js/index.js"></script>
+    <script src="js/registration.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/user-profile.js"></script>
+</body>
+
+</html>
+
+inde.php
+
+
+mysql
+USE ecommerce;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    region VARCHAR(100) NOT NULL,
+    province VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    zipcode VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Categories table
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    parent_id INT,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (parent_id) REFERENCES categories(id) ON DELETE CASCADE
+);
+
+-- Brands table
+CREATE TABLE brands (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    logo_url VARCHAR(255),
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Products table
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    sku VARCHAR(100) UNIQUE,
+    brand_id INT,
+    category_id INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    sale_price DECIMAL(10, 2),
+    stock_quantity INT DEFAULT 0,
+    is_featured BOOLEAN DEFAULT FALSE,
+    is_new_arrival BOOLEAN DEFAULT FALSE,
+    is_on_sale BOOLEAN DEFAULT FALSE,
+    description TEXT,
+    specs TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (brand_id) REFERENCES brands(id) ON DELETE SET NULL,
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+-- Product images table
+CREATE TABLE product_images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    is_primary BOOLEAN DEFAULT FALSE,
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+-- Product attributes table
+CREATE TABLE attributes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
+    attribute_type ENUM('text', 'number', 'boolean', 'select') DEFAULT 'text',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Product attribute values
+CREATE TABLE product_attributes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    attribute_id INT NOT NULL,
+    value TEXT NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (attribute_id) REFERENCES attributes(id) ON DELETE CASCADE,
+    UNIQUE KEY (product_id, attribute_id)
+);
+
+-- Shopping cart table
+CREATE TABLE carts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    session_id VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Cart items table
+CREATE TABLE cart_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (cart_id) REFERENCES carts(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    UNIQUE KEY (cart_id, product_id)
+);
+
+-- Orders table
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    status ENUM('pending', 'processing', 'shipped', 'delivered', 'cancelled') DEFAULT 'pending',
+    total_amount DECIMAL(10, 2) NOT NULL,
+    shipping_fee DECIMAL(10, 2) DEFAULT 0.00,
+    tax_amount DECIMAL(10, 2) DEFAULT 0.00,
+    shipping_address TEXT NOT NULL,
+    billing_address TEXT NOT NULL,
+    payment_method VARCHAR(50) NOT NULL,
+    payment_status ENUM('pending', 'paid', 'failed', 'refunded') DEFAULT 'pending',
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- Order items table
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    subtotal DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- Wishlists table
+CREATE TABLE wishlists (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    UNIQUE KEY (user_id, product_id)
+);
+
+-- Reviews table
+CREATE TABLE reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    user_id INT NOT NULL,
+    rating TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    title VARCHAR(255),
+    comment TEXT,
+    is_verified_purchase BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- Coupons table
+CREATE TABLE coupons (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    discount_type ENUM('percentage', 'fixed') NOT NULL,
+    discount_value DECIMAL(10, 2) NOT NULL,
+    min_purchase DECIMAL(10, 2) DEFAULT 0.00,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+    usage_limit INT,
+    usage_count INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+connection.php
+
+<?php
+$host = 'localhost';
+$dbname = 'ecommerce';
+$username = 'root';
+$password = '#071823Kl';
+
+// Create PDO connection for prepared statements
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+
+// Create MySQLi connection for the category files
+$mysqli_conn = new mysqli($host, $username, $password, $dbname);
+if ($mysqli_conn->connect_error) {
+    die("MySQLi connection failed: " . $mysqli_conn->connect_error);
+}
+
+// Update categories_music.php and categories_sports.php to use $mysqli_conn
+global $mysqli_conn;
+?>

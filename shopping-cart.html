@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/index.css">
+    <link rel="stylesheet" href="./CSS/shopping-cart.css">
+    <script src="https://kit.fontawesome.com/e588cb9d47.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss"></script>
+    <title>William's Shopping Cart</title>
+</head>
+<body>
+    <!--Navigation and Header Section-->
+    <header class="header">
+        <div class="nametag">
+            <img src="assets/williams.png" alt="Williams Logo">
+        </div>
+        <section class="leftheader">
+            <div class="SContainer">
+                <input type="search" placeholder="Search William's....">
+            </div>
+            <img src="assets/notif-bell.png" alt="Notification Bell" class="icon" style="cursor: pointer;">
+            <img src="assets/shopping-cart.png" alt="Shopping Cart" class="icon" style="cursor: pointer;">
+            <img id="myAvatar" src="assets/Generic-avatar.png" alt="User Icon" style="cursor: pointer;">
+        </section>
+    </header>
+    <section class="navigation">
+        <div>
+            <h3>Music</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <div>
+            <h3>Sports</h3>
+            <span class="arrow">&#8249;</span>
+        </div>
+        <h3>Services</h3>
+        <h3 class="ab">About us</h3>
+    </section>
+
+<!--Main Section-->
+<div class="container">
+    <div class="progress-bar">
+     <div class="step active">
+      <div class="step">
+        <div class="step-content">
+          <div class="circle">1</div>
+          <div class="label">Shopping Cart</div>
+        </div>
+        <div class="line" active ></div>
+      </div>
+     </div>
+      <div class="step">
+        <div class="step-content">
+          <div class="circle">2</div>
+          <div class="label">Checkout</div>
+        </div>
+        <div class="line"></div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <div class="circle">3</div>
+          <div class="label">Order Complete</div>
+        </div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <button class="back-button">
+     <span class="arrow"><a href="services-fullsetup.html"><i class="fa-solid fa-chevron-left"></i></span> Continue Shopping
+    </button></a>
+  </div>
+   <div class="cart-section">
+        <div class="cart-header">
+          <h2>Shopping Cart <span id="cart-count">(5)</span></h2>
+          <div class="header-actions">
+            <label><input type="checkbox" checked class="custom-checkbox"> Select All</label>
+            <div class="edit-icon">Edit<img src="assets/image 42.png"></img>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Cart Items -->
+        <div class="cart-item">
+          <div class="left">
+            <input type="checkbox" checked class="custom-checkbox">
+            <img src="assets/Yamaha FG800.png" alt="Guitar">
+            <div class="item-details">
+              <p class="item-name">Yamaha FG800</p>
+              <p class="item-price">₱ 15,000.00</p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="quantity">
+              <button>-</button>
+              <span>1</span>
+              <button>+</button>
+            </div>
+            <a href="#" class="edit-link">Edit</a>
+          </div>
+        </div>
+    
+        <div class="cart-item">
+          <div class="left">
+            <input type="checkbox" checked class="custom-checkbox">
+            <img src="assets/ball.png" alt="Basketball">
+            <div class="item-details">
+              <p class="item-name">Spalding Official NBA Game Ball</p>
+              <p class="item-price">₱ 5,500.00</p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="quantity">
+              <button>-</button>
+              <span>1</span>
+              <button>+</button>
+            </div>
+            <a href="#" class="edit-link">Edit</a>
+          </div>
+        </div>
+        <div class="cart-item">
+            <div class="left">
+                <input type="checkbox" checked class="custom-checkbox">
+              <img src="assets/Yamaha FG800.png" alt="Guitar">
+              <div class="item-details">
+                <p class="item-name">Yamaha FG800</p>
+                <p class="item-price">₱ 15,000.00</p>
+              </div>
+            </div>
+            <div class="right">
+              <div class="quantity">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+              </div>
+              <a href="#" class="edit-link">Edit</a>
+            </div>
+          </div>
+    
+        <!-- Repeated Guitar Item -->
+        <!-- You can duplicate this as needed -->
+        <div class="cart-item">
+          <div class="left">
+            <input type="checkbox" checked class="custom-checkbox">
+            <img src="assets/drive-download-20250310T045422Z-001/Fender CD-60S.png" alt="Guitar">
+            <div class="item-details">
+              <p class="item-name">Fender CD-60S</p>
+              <p class="item-price">₱ 12,000.00</p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="quantity">
+              <button>-</button>
+              <span>1</span>
+              <button>+</button>
+            </div>
+            <a href="#" class="edit-link">Edit</a>
+          </div>
+        </div>
+    
+        <!-- Total & Checkout -->
+        <div class="cart-footer">
+            <div class="total">
+          <p>Total <span>₱ 0.00</span> <a href="checkout.html"><button class="checkout-btn">Checkout</button></a></p>
+        </div>
+      </div>
+   </div>
+
+<script src="JS/shoppingcart.js"></script>
+</body>
+</html>
